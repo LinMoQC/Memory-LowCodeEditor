@@ -3,7 +3,7 @@ import { CommonComponentProps } from "../../interface";
 
 const Button = ({ id,type, text }: CommonComponentProps) => {
     return (
-        <AntdButton data-component-id={id} type={type}>{text}</AntdButton>
+        <AntdButton data-component-id={id} type={type} style={{marginRight: '10px'}}>{text}</AntdButton>
     )
 }
 

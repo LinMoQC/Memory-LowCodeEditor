@@ -1,10 +1,10 @@
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import { useComponentConfigStore } from "../stores/component-config";
 import { Component, useComponentsStore } from "../stores/componentes"
 import HoverMask from "./HoverMask";
 
 const EditArea:React.FC = () => {
-    const {components,addComponent} = useComponentsStore();
+    const {components} = useComponentsStore();
     const { componentConfig } = useComponentConfigStore();
 
     const [hoverComponentId, setHoverComponentId] = useState<number>();
@@ -50,7 +50,10 @@ const EditArea:React.FC = () => {
     return (
         <div className="h-[100%] edit-area" onMouseOver={handleMouseOver} onMouseLeave={() => setHoverComponentId(undefined)}>
             {renderComponents(components)}
-            {hoverComponentId && <HoverMask containerClassName="edit-area" componentId={hoverComponentId}/>}
+            {hoverComponentId && 
+            <HoverMask containerClassName="edit-area" protalWrapperClassName='portal-wapper' componentId={hoverComponentId}/>
+            }
+            <div className="portal-wapper"></div>
         </div>
     )
 }
