@@ -2,7 +2,7 @@ import { useMemo } from "react"
 import { useComponentConfigStore } from "../stores/component-config"
 import { MaterialItem } from "./MaterialItem"
 
-const Materail: React.FC = () => {
+const Material: React.FC = () => {
     const {componentConfig} = useComponentConfigStore()
 
     const componentes = useMemo(() => {
@@ -20,4 +20,4 @@ const Materail: React.FC = () => {
     )
 }
 
-export default Materail
+export default Material

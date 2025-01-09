@@ -1,4 +1,3 @@
-import { replace } from "lodash-es";
 import { CSSProperties } from "react";
 import { create } from "zustand";
 
@@ -24,7 +23,7 @@ interface State {
     components: Component[];
     curComponentId?: number | null;
     curComponent: Component | null;
-
+    mode: 'edit' | 'preview'
 }
 
 interface Action {
@@ -33,6 +32,7 @@ interface Action {
     updateComponent: (componentId: number, props: any) => void;
     setCurComponentId: (componentId: number) => void;
     updateComponentStyles: (componentId: number,styles: CSSProperties,replace?: Boolean) => void
+    setMode: (mode: State['mode']) => void;
 }
 
 export const useComponentsStore = create<State & Action>(
@@ -47,6 +47,8 @@ export const useComponentsStore = create<State & Action>(
         ],
         curComponent: null,
         curComponentId: null,
+        mode: 'edit',
+        setMode: (mode) => set({mode}),
         setCurComponentId: (componentId) => {
             set((state) => ({
                 curComponentId: componentId,
