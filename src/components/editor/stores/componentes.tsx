@@ -1,12 +1,23 @@
+import { replace } from "lodash-es";
+import { CSSProperties } from "react";
 import { create } from "zustand";
+
+export interface ComponentSetter {
+    name: string;
+    label: string;
+    type: string;
+    [key: string]: any;
+}
 
 export interface Component {
     id: number;
     name: string;
     props: any;
     children?: Component[];
+    setter?: ComponentSetter;
     parentId?: number;
     desc: string;
+    styles?: CSSProperties;
 }
 
 interface State {
@@ -20,7 +31,8 @@ interface Action {
     addComponent: (component: Component, parentId?: number) => void;
     deleteComponent: (componentId: number) => void;
     updateComponent: (componentId: number, props: any) => void;
-    setCurComponentId: (componentId: number | null) => void;
+    setCurComponentId: (componentId: number) => void;
+    updateComponentStyles: (componentId: number,styles: CSSProperties,replace?: Boolean) => void
 }
 
 export const useComponentsStore = create<State & Action>(
@@ -93,7 +105,17 @@ export const useComponentsStore = create<State & Action>(
 
                 return {components: [...state.components]};
             })
-        }
+        },
+        updateComponentStyles: (componentId,styles,replace) => 
+            set((state) => {
+                const component = getComponentById(componentId,state.components)
+                if(component){
+                    component.styles = replace ? {...styles} : {...component.styles,...styles}
+                    return {components: [...state.components]}
+                }
+
+                return {components: [...state.components]};
+            })
     })
 )
 

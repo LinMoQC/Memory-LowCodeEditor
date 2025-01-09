@@ -24,7 +24,9 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
     });
 
     useEffect(() => {
-        updatePosition();
+        setTimeout(() => {
+            updatePosition();
+        },200)
     }, [componentId, components])
 
     // ResizeObserver监听页面尺寸变化
@@ -102,7 +104,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
 
     function handleDelete() {
         deleteComponent(curComponentId!);
-        setCurComponentId(null);
+        setCurComponentId(0);
         message.success('删除成功');
     }
     return createPortal((

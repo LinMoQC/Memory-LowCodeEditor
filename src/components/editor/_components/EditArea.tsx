@@ -34,7 +34,7 @@ const EditArea:React.FC = () => {
             if(componentId){
                 // 两次点击同一个组件取消选中
                 if(+componentId === curComponentId){
-                    setCurComponentId(null);
+                    setCurComponentId(0);
                     return
                 }
                 setCurComponentId(+componentId);
@@ -59,7 +59,8 @@ const EditArea:React.FC = () => {
                     id: component.id,
                     name: component.name,
                     ...config.defaultProps,
-                    ...component.props
+                    ...component.props,
+                    styles: component.styles
                 },
                 renderComponents(component.children || [])
             )

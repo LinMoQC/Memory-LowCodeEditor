@@ -2,12 +2,15 @@ import { create } from "zustand";
 import Container from "../materirals/Container";
 import Button from "../materirals/Button";
 import Page from "../materirals/Page";
+import { ComponentSetter } from "./componentes";
 
 export interface ComponentConfig {
     name: string;
     defaultProps: Record<string, any>;
     component: any;
+    setter?: ComponentSetter[]
     desc: string;
+    stylesSetter?: ComponentSetter[]
 }
 
 interface State {
@@ -32,6 +35,34 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
                 type: 'primary',
                 text: '按钮'
             },
+            setter: [
+                {
+                    name: 'type',
+                    label: '按钮类型',
+                    type: 'select',
+                    options: [
+                        {label: '主按钮', value: 'primary'},
+                        {label: '次按钮', value: 'default'},
+                    ]
+                },
+                {
+                    name: 'text',
+                    label: "文本",
+                    type: 'input'
+                }
+            ],
+            stylesSetter: [
+                {
+                    name: 'width',
+                    label: '宽度',
+                    type: 'inputNumber'
+                },
+                {
+                    name: 'height',
+                    label: '高度',
+                    type: 'inputNumber',
+                }
+            ],
             component: Button,
             desc: '按钮'    
         },

@@ -21,7 +21,7 @@ export function useMaterailDrop(accept: string[],id: number) {
                 id: new Date().getTime(),
                 name: item.type,
                 props: config.defaultProps,
-                desc: config.desc
+                desc: config.desc,
             },id)
 
             message.success(`成功拖拽 ${item.type} 到画布`);
