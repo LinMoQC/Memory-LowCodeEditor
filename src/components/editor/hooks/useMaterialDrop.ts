@@ -16,12 +16,13 @@ export function useMaterailDrop(accept: string[],id: number) {
                 return;
             }
 
-            console.log(id)
+            const config = componentConfig[item.type];
 
             addComponent({
                 id: new Date().getTime(),
                 name: item.type,
-                props
+                props: config.defaultProps,
+                desc: config.desc
             },id)
 
             message.success(`成功拖拽 ${item.type} 到画布`);

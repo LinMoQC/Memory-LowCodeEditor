@@ -2,15 +2,15 @@ import React, { MouseEventHandler, useState } from "react";
 import { useComponentConfigStore } from "../stores/component-config";
 import { Component, useComponentsStore } from "../stores/componentes"
 import HoverMask from "./HoverMask";
+import SelectedMask from "./SelectedMask";
 
 const EditArea:React.FC = () => {
-    const {components} = useComponentsStore();
+    const {components,curComponentId,setCurComponentId} = useComponentsStore();
     const { componentConfig } = useComponentConfigStore();
 
     const [hoverComponentId, setHoverComponentId] = useState<number>();
 
     const handleMouseOver: MouseEventHandler = (e) => {
-        // debugger;
         const path = e.nativeEvent.composedPath();
 
         for(let i = 0; i < path.length; i+=1) {
@@ -19,6 +19,25 @@ const EditArea:React.FC = () => {
             const componentId = ele.dataset?.componentId;
             if(componentId){
                 setHoverComponentId(+componentId);
+                return
+            }
+        }
+    }
+
+    const handleClick: MouseEventHandler = (e) => {
+        const path = e.nativeEvent.composedPath();
+
+        for(let i = 0;i<path.length;i+=1){
+            const ele = path[i] as HTMLElement;
+
+            const componentId = ele.dataset?.componentId;
+            if(componentId){
+                // 两次点击同一个组件取消选中
+                if(+componentId === curComponentId){
+                    setCurComponentId(null);
+                    return
+                }
+                setCurComponentId(+componentId);
                 return
             }
         }
@@ -48,11 +67,20 @@ const EditArea:React.FC = () => {
     }
 
     return (
-        <div className="h-[100%] edit-area" onMouseOver={handleMouseOver} onMouseLeave={() => setHoverComponentId(undefined)}>
+        <div 
+        className="h-[100%] edit-area" 
+        id="edit-area"
+        onMouseOver={handleMouseOver} 
+        onMouseLeave={() => setHoverComponentId(undefined)}
+        onClick={handleClick}
+        >
             {renderComponents(components)}
-            {hoverComponentId && 
-            <HoverMask containerClassName="edit-area" protalWrapperClassName='portal-wapper' componentId={hoverComponentId}/>
+            {hoverComponentId && hoverComponentId !== curComponentId && 
+            <HoverMask containerClassName="edit-area" portalWrapperClassName='portal-wapper' componentId={hoverComponentId}/>
             }
+            {curComponentId && (
+                <SelectedMask portalWrapperClassName='portal-wapper' containerClassName="edit-area" componentId={curComponentId}/>
+            )}
             <div className="portal-wapper"></div>
         </div>
     )

@@ -5,10 +5,10 @@ import { getComponentById, useComponentsStore } from "../stores/componentes";
 interface HoverMaskProps {
     containerClassName: string;
     componentId: number;
-    protalWrapperClassName: string
+    portalWrapperClassName: string
 }
 
-function HoverMask({ containerClassName,protalWrapperClassName, componentId }: HoverMaskProps) {
+function HoverMask({ containerClassName,portalWrapperClassName, componentId }: HoverMaskProps) {
     const {components} = useComponentsStore();
     const curComponent = useMemo(() => {
         return getComponentById(componentId,components);
@@ -59,7 +59,7 @@ function HoverMask({ containerClassName,protalWrapperClassName, componentId }: H
     }
 
     const el = useMemo(() => {
-        return document.querySelector(`.${protalWrapperClassName}`)!;
+        return document.querySelector(`.${portalWrapperClassName}`)!;
     }, [])
 
     return createPortal((
@@ -101,7 +101,7 @@ function HoverMask({ containerClassName,protalWrapperClassName, componentId }: H
                     whiteSpace: 'nowrap'
                 }}
             >
-                {curComponent?.name}
+                {curComponent?.desc}
             </div>
         </div>
         </Fragment>

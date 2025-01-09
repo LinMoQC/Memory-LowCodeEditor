@@ -6,14 +6,14 @@ const Materail: React.FC = () => {
     const {componentConfig} = useComponentConfigStore()
 
     const componentes = useMemo(() => {
-        return Object.values(componentConfig)
+        return Object.values(componentConfig).filter(item => item.name !== 'Page')
     },[componentConfig])
 
     return (
         <div>
             {componentes.map((component,index) => {
                 return (
-                    <MaterialItem name={component.name} key={component.name + index} />
+                    <MaterialItem name={component.name} key={component.name + index} desc={component.desc}/>
                 )
             })}
         </div>
