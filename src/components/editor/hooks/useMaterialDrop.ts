@@ -10,7 +10,6 @@ export function useMaterailDrop(accept: string[],id: number) {
     const [{canDrop}, drop] = useDrop(() => ({
         accept: accept,
         drop: (item: { type: string },monitor) => {
-            const props = componentConfig[item.type].defaultProps;
             const didDrop = monitor.didDrop()
             if(didDrop){
                 return;

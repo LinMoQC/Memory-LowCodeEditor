@@ -12,7 +12,7 @@ interface SelectedMaskProps {
 
 const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
     const { containerClassName, portalWrapperClassName, componentId } = props
-    const {curComponentId,components} = useComponentsStore();
+    const { curComponentId, components, deleteComponent, setCurComponentId} = useComponentsStore();
 
     const [position, setPosition] = useState({
         top: 0,
@@ -25,7 +25,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
 
     useEffect(() => {
         updatePosition();
-    }, [componentId,components])
+    }, [componentId, components])
 
     // ResizeObserver监听页面尺寸变化
     useEffect(() => {
@@ -34,12 +34,12 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
                 updatePosition();
             }, 100);
         });
-    
-        const targetElement = document.getElementById('edit-area'); 
+
+        const targetElement = document.getElementById('edit-area');
         if (targetElement) {
             resizeObserver.observe(targetElement);
         }
-    
+
         return () => {
             if (targetElement) {
                 resizeObserver.unobserve(targetElement);
@@ -91,17 +91,19 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
         const parentComponents = []
         let component = curComponent
 
-        while(component?.parentId){
-            component = getComponentById(component.parentId,components);
-            if(component){
+        while (component?.parentId) {
+            component = getComponentById(component.parentId, components);
+            if (component) {
                 parentComponents.push(component);
             }
         }
         return parentComponents;
-    },[curComponent])
+    }, [curComponent])
 
     function handleDelete() {
-        message.success('删除成功')
+        deleteComponent(curComponentId!);
+        setCurComponentId(null);
+        message.success('删除成功');
     }
     return createPortal((
         <Fragment>
@@ -117,7 +119,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
                 zIndex: 12,
                 borderRadius: 4,
                 boxSizing: 'border-box',
-            }}/>
+            }} />
 
             <div style={{
                 position: "absolute",
@@ -168,7 +170,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
                 </Space>
             </div>
         </Fragment>
-    ),el)
+    ), el)
 }
 
 export default SelectedMask
