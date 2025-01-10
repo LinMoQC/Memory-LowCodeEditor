@@ -1,12 +1,13 @@
 import { create } from "zustand";
 import { ComponentSetter } from "./componentes";
-import { ContainerConfig } from "../materirals/Container";
-import { ButtonConfig } from "../materirals/Button";
-import { PageConfig } from "../materirals/Page";
-import { ModalConfig } from "../materirals/Modal";
-import { TableConfig } from "../materirals/Table";
-import { TableColumnConfig } from "../materirals/TableColumn";
-import { FormConfig } from "../materirals/Form";
+import { ContainerConfig } from "../../../materials/Container";
+import { ButtonConfig } from "../../../materials/Button";
+import { PageConfig } from "../../../materials/Page";
+import { ModalConfig } from "../../../materials/Modal";
+import { TableConfig } from "../../../materials/Table";
+import { TableColumnConfig } from "../../../materials/TableColumn";
+import { FormConfig } from "../../../materials/Form";
+import { FormItemConfig } from "../../../materials/FormItem";
 
 export interface ComponentConfig {
     name: string;
@@ -47,7 +48,8 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
         Modal: ModalConfig,
         Table: TableConfig,
         TableColumn: TableColumnConfig,
-        Form: FormConfig
+        Form: FormConfig,
+        FormItem: FormItemConfig
     },
     registerComponent: (name, componentConfig) => set((state) => {
         return {

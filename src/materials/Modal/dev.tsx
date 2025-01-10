@@ -1,5 +1,5 @@
-import { useMaterailDrop } from '../../hooks/useMaterialDrop';
-import { CommonComponentProps } from '../../interface';
+import { useMaterailDrop } from "../../components/editor/hooks/useMaterialDrop";
+import { CommonComponentProps } from "../../components/editor/interface";
 
 function Modal({ id, children, title, styles }: CommonComponentProps) {
 

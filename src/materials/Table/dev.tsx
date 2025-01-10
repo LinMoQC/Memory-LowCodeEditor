@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { Table as AntdTable } from 'antd';
-import { CommonComponentProps } from "../../interface";
-import { useMaterailDrop } from "../../hooks/useMaterialDrop";
 import { useDrag } from "react-dnd";
+import { useMaterailDrop } from "../../components/editor/hooks/useMaterialDrop";
+import { CommonComponentProps } from "../../components/editor/interface";
 
 interface TableProps extends CommonComponentProps {
 

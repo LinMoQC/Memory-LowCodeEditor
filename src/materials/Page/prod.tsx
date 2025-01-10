@@ -1,4 +1,5 @@
-import { CommonComponentProps } from "../../interface";
+import { CommonComponentProps } from "../../components/editor/interface";
+
 
 function Page({ id, name, children, styles }: CommonComponentProps) {
 

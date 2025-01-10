@@ -1,4 +1,4 @@
-import { ComponentConfig } from "../../stores/component-config";
+import { ComponentConfig } from "../../components/editor/stores/component-config";
 import ContainerDev from "./dev";
 import ContainerProd from "./prod";
 

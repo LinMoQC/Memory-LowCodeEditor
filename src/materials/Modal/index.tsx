@@ -1,4 +1,4 @@
-import { ComponentConfig } from "../../stores/component-config";
+import { ComponentConfig } from "../../components/editor/stores/component-config";
 import ModalDev from "./dev";
 import ModalProd from "./prod";
 
