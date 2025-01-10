@@ -2,6 +2,8 @@ import React from "react";
 import { Component, useComponentsStore } from "../stores/componentes";
 import { useComponentConfigStore } from "../stores/component-config";
 import { message } from "antd";
+import { GoToLinkConfig } from "../actions/GoToLink";
+import { ShowMessageConfig } from "../actions/ShowMessage";
 
 const Preview:React.FC = () => {
     const { components } = useComponentsStore()
@@ -14,17 +16,18 @@ const Preview:React.FC = () => {
             const eventConfig = component.props[event.name];
 
             if(eventConfig){
-                const {type} = eventConfig
                 props[event.name] = () => {
-                    if (type === 'goToLink' && eventConfig.url) {
-                        window.location.href = eventConfig.url;
-                    } else if (type === 'showMessage' && eventConfig.config) {
-                        if (eventConfig.config.type === 'success') {
-                            message.success(eventConfig.config.text);
-                        } else if (eventConfig.config.type === 'error') {
-                            message.error(eventConfig.config.text);
+                    eventConfig?.actions?.forEach((action: GoToLinkConfig | ShowMessageConfig ) => {
+                        if (action.type === 'goToLink' && eventConfig.url) {
+                            window.location.href = eventConfig.url;
+                        } else if (action.type === 'showMessage' && eventConfig.config) {
+                            if (eventConfig.config.type === 'success') {
+                                message.success(eventConfig.config.text);
+                            } else if (eventConfig.config.type === 'error') {
+                                message.error(eventConfig.config.text);
+                            }
                         }
-                    }
+                    })
                 }
             }
         })

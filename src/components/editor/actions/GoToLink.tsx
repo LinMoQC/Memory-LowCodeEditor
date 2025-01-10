@@ -1,19 +1,31 @@
+import { useState } from "react";
 import { ComponentEvent } from "../stores/component-config";
 import { useComponentsStore } from "../stores/componentes";
 import TextArea from "antd/es/input/TextArea";
 
-export function GoToLink(props: { event: ComponentEvent }) {
-    const { event } = props
-    const { curComponentId, curComponent, updateComponent } = useComponentsStore()
+export interface GoToLinkConfig{
+    type: 'goToLink',
+    url: string
+}
 
-    function urlChange(eventName: string, value: string) {
+export interface GoToLinkProps {
+    defaultValue?: string;
+    onChange?: (config: GoToLinkConfig) => void
+}
+
+export function GoToLink(props: GoToLinkProps) {
+    const { onChange,defaultValue } = props
+    const { curComponentId, curComponent, updateComponent } = useComponentsStore()
+    const [value,setValue] = useState(defaultValue)
+
+    function urlChange(value: string) {
         if (!curComponentId) return
 
-        updateComponent(curComponentId, {
-            [eventName]: {
-                ...curComponent?.props?.[eventName],
-                url: value
-            }
+        setValue(value)
+
+        onChange?.({
+            type: 'goToLink',
+            url: value
         })
     }
 
@@ -23,8 +35,8 @@ export function GoToLink(props: { event: ComponentEvent }) {
             <div>
                 <TextArea 
                 style={{width: 500,height: 200,border: '1px solid #000'}}
-                onChange={(e) => {urlChange(event.name,e.target.value)}}
-                value={curComponent?.props?.[event.name]?.url}
+                onChange={(e) => {urlChange(e.target.value)}}
+                value={value || ''}
                 />
             </div>
         </div>
