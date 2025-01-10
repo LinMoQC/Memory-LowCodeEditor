@@ -40,7 +40,7 @@ const Preview: React.FC = () => {
                             const component = componentRefs.current[action.config.componentId];
 
                             if (component) {
-                                component[action.config.method]?.();
+                                component[action.config.method]?.(...args);
                             }
                         }
 

@@ -6,6 +6,7 @@ import { PageConfig } from "../materirals/Page";
 import { ModalConfig } from "../materirals/Modal";
 import { TableConfig } from "../materirals/Table";
 import { TableColumnConfig } from "../materirals/TableColumn";
+import { FormConfig } from "../materirals/Form";
 
 export interface ComponentConfig {
     name: string;
@@ -45,7 +46,8 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
         Page: PageConfig,
         Modal: ModalConfig,
         Table: TableConfig,
-        TableColumn: TableColumnConfig
+        TableColumn: TableColumnConfig,
+        Form: FormConfig
     },
     registerComponent: (name, componentConfig) => set((state) => {
         return {
