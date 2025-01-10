@@ -1,35 +1,47 @@
 import { useDrop } from "react-dnd";
 import { useComponentConfigStore } from "../stores/component-config";
-import { useComponentsStore } from "../stores/componentes";
+import { getComponentById, useComponentsStore } from "../stores/componentes";
 import { message } from "antd";
 
-export function useMaterailDrop(accept: string[],id: number) {
-    const {addComponent} = useComponentsStore();
-    const {componentConfig} = useComponentConfigStore();
+export interface ItemType {
+    type: string;
+    dragType?: 'move' | 'add',
+    id: number
+}
 
-    const [{canDrop}, drop] = useDrop(() => ({
+export function useMaterailDrop(accept: string[], id: number) {
+    const { addComponent, deleteComponent, components } = useComponentsStore();
+    const { componentConfig } = useComponentConfigStore();
+
+    const [{ canDrop }, drop] = useDrop(() => ({
         accept: accept,
-        drop: (item: { type: string },monitor) => {
+        drop: (item: ItemType, monitor) => {
             const didDrop = monitor.didDrop()
-            if(didDrop){
+            if (didDrop) {
                 return;
             }
 
-            const config = componentConfig[item.type];
+            if (item.dragType === 'move') {
+                const component = getComponentById(item.id, components)!;
+                deleteComponent(item.id);
+                addComponent(component, id)
+            } else {
+                const config = componentConfig[item.type];
 
-            addComponent({
-                id: new Date().getTime(),
-                name: item.type,
-                props: config.defaultProps,
-                desc: config.desc,
-            },id)
+                addComponent({
+                    id: new Date().getTime(),
+                    name: item.type,
+                    props: config.defaultProps,
+                    desc: config.desc,
+                }, id)
 
-            message.success(`成功拖拽 ${item.type} 到画布`);
+                message.success(`成功拖拽 ${item.type} 到画布`);
+            }
         },
         collect: (monitor) => ({
             canDrop: monitor.canDrop(),
         }),
     }));
 
-    return {canDrop,drop}
+    return { canDrop, drop }
 }

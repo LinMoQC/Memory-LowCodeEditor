@@ -25,7 +25,7 @@ const Header: React.FC = () => {
                             onClick={() => { setMode('edit') }}
                             type='primary'
                         >
-                            退出预览
+                            编辑
                         </Button>
                     )}
                 </Space>
