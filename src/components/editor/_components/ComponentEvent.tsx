@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useComponentsStore } from "../stores/componentes";
+import { getComponentById, useComponentsStore } from "../stores/componentes";
 import { useComponentConfigStore } from "../stores/component-config";
 import type { ComponentEvent } from "../stores/component-config";
 import { Button, Collapse, CollapseProps, message } from "antd";
@@ -7,12 +7,12 @@ import { ActionModal, ActionType } from "./ActionModal";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const ComponentEvent: React.FC = () => {
-    const { curComponent, updateComponent } = useComponentsStore();
+    const { curComponent, updateComponent,components } = useComponentsStore();
     const { componentConfig } = useComponentConfigStore();
     const [actionModalOpen, setActionModalOpen] = useState(false);
     const [curEvent, setCurEvent] = useState<ComponentEvent>();
-    const [curAction,setCurAction] = useState<ActionType>();
-    const [curActionIndex,setCurActionIndex] = useState<number>();
+    const [curAction, setCurAction] = useState<ActionType>();
+    const [curActionIndex, setCurActionIndex] = useState<number>();
 
     if (!curComponent) return null
 
@@ -32,8 +32,8 @@ const ComponentEvent: React.FC = () => {
         }
     }
 
-    function editAction(config: ActionType,index: number) {
-        if(!curComponent) {
+    function editAction(config: ActionType, index: number) {
+        if (!curComponent) {
             return;
         }
 
@@ -41,7 +41,7 @@ const ComponentEvent: React.FC = () => {
         setCurActionIndex(index)
         setActionModalOpen(true);
     }
-    
+
 
 
     const items: CollapseProps['items'] = (componentConfig[curComponent.name].events || []).map(event => {
@@ -64,7 +64,7 @@ const ComponentEvent: React.FC = () => {
                                 item.type === 'goToLink' ? <div className='border border-[#aaa] m-[10px] p-[10px] relative'>
                                     <div className='text-[blue]'>跳转链接</div>
                                     <div>{item.url}</div>
-                                    <div style={{position: 'absolute',top: 10, right: 30, cursor: 'pointer'}} onClick={() => editAction(item,index)}>
+                                    <div style={{ position: 'absolute', top: 10, right: 30, cursor: 'pointer' }} onClick={() => editAction(item, index)}>
                                         <EditOutlined />
                                     </div>
                                     <div style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }}
@@ -77,7 +77,7 @@ const ComponentEvent: React.FC = () => {
                                     <div className='text-[blue]'>消息弹窗</div>
                                     <div>{item.config.type}</div>
                                     <div>{item.config.text}</div>
-                                    <div style={{position: 'absolute',top: 10, right: 30, cursor: 'pointer'}} onClick={() => editAction(item,index)}>
+                                    <div style={{ position: 'absolute', top: 10, right: 30, cursor: 'pointer' }} onClick={() => editAction(item, index)}>
                                         <EditOutlined />
                                     </div>
                                     <div style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }}
@@ -88,9 +88,23 @@ const ComponentEvent: React.FC = () => {
                             {
                                 item.type === 'customJS' ? <div key="customJS" className='border border-[#aaa] m-[10px] p-[10px] relative'>
                                     <div className='text-[blue]'>自定义 JS</div>
-                                    <div style={{position: 'absolute',top: 10, right: 30, cursor: 'pointer'}} onClick={() => editAction(item,index)}>
+                                    <div style={{ position: 'absolute', top: 10, right: 30, cursor: 'pointer' }} onClick={() => editAction(item, index)}>
                                         <EditOutlined />
                                     </div>
+                                    <div style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }}
+                                        onClick={() => deleteAction(event, index)}
+                                    ><DeleteOutlined /></div>
+                                </div> : null
+                            }
+                            {
+                                item.type === 'componentMethod' ? <div key="componentMethod" className='border border-[#aaa] m-[10px] p-[10px] relative'>
+                                    <div className='text-[blue]'>组件方法</div>
+                                    <div>{getComponentById(item.config.componentId, components)?.desc}</div>
+                                    <div>{item.config.componentId}</div>
+                                    <div>{item.config.method}</div>
+                                    <div style={{ position: 'absolute', top: 10, right: 30, cursor: 'pointer' }}
+                                        onClick={() => editAction(item, index)}
+                                    ><EditOutlined /></div>
                                     <div style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }}
                                         onClick={() => deleteAction(event, index)}
                                     ><DeleteOutlined /></div>
@@ -104,13 +118,13 @@ const ComponentEvent: React.FC = () => {
     })
 
     function handleModalOk(config?: ActionType) {
-        if(!config || !curEvent || !curComponent) {
-            return ;
+        if (!config || !curEvent || !curComponent) {
+            return;
         }
 
-        if(curAction) {
-            updateComponent(curComponent.id,  { 
-                [curEvent.name]: { 
+        if (curAction) {
+            updateComponent(curComponent.id, {
+                [curEvent.name]: {
                     actions: curComponent.props[curEvent.name]?.actions.map((item: ActionType, index: number) => {
                         return index === curActionIndex ? config : item;
                     })
@@ -118,8 +132,8 @@ const ComponentEvent: React.FC = () => {
             })
             message.success('修改成功')
         } else {
-            updateComponent(curComponent.id,  { 
-                [curEvent.name]: { 
+            updateComponent(curComponent.id, {
+                [curEvent.name]: {
                     actions: [
                         ...(curComponent.props[curEvent.name]?.actions || []),
                         config
@@ -138,7 +152,7 @@ const ComponentEvent: React.FC = () => {
         <Collapse className='mb-[10px]' items={items} defaultActiveKey={componentConfig[curComponent.name].events?.map(item => item.name)} />
         <ActionModal visible={actionModalOpen} handleOk={handleModalOk} handleCancel={() => {
             setActionModalOpen(false)
-        }} action={curAction}/>
+        }} action={curAction} />
     </div>
 }
 

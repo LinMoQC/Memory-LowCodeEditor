@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { GoToLink, GoToLinkConfig } from "../actions/GoToLink"
 import { ShowMessage, ShowMessageConfig } from "../actions/ShowMessage"
 import { CustomJS, CustomJSConfig } from "../actions/CustomJS"
+import { ComponentMethod, ComponentMethodConfig } from "../actions/ComponentMethod"
 
 export interface ActionModalProps {
     visible: boolean
@@ -11,7 +12,7 @@ export interface ActionModalProps {
     action?: ActionType,
 }
 
-export type ActionType = GoToLinkConfig | ShowMessageConfig | CustomJSConfig
+export type ActionType = GoToLinkConfig | ShowMessageConfig | CustomJSConfig | ComponentMethodConfig
 
 export function ActionModal(props: ActionModalProps) {
     const {
@@ -27,7 +28,8 @@ export function ActionModal(props: ActionModalProps) {
     const map = {
         goToLink: '访问链接',
         showMessage: "消息提示",
-        customJS: '自定义 JS'
+        customJS: '自定义 JS',
+        componentMethod: '组件方法'
     }
 
     useEffect(() => {
@@ -46,7 +48,7 @@ export function ActionModal(props: ActionModalProps) {
         onCancel={handleCancel}
     >
         <div className="h-[500px]">
-            <Segmented value={key} onChange={setKey} block options={['访问链接', '消息提示', '自定义 JS']} />
+            <Segmented value={key} onChange={setKey} block options={['访问链接', '消息提示', '组件方法','自定义 JS']} />
             {
                 key === '访问链接' && <GoToLink onChange={(config) => {
                     setCurConfig(config)
@@ -56,6 +58,11 @@ export function ActionModal(props: ActionModalProps) {
                 key === '消息提示' && <ShowMessage onChange={(config) => {
                     setCurConfig(config)
                 }} value={action?.type === 'showMessage' ? action.config : undefined}/>
+            }
+            {
+                key === '组件方法' && <ComponentMethod onChange={(config) => {
+                    setCurConfig(config)
+                }} />
             }
             {
                 key === '自定义 JS' && <CustomJS onChange={(config) => {

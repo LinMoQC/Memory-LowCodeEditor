@@ -36,7 +36,14 @@ const Preview: React.FC = () => {
                                     message.success(content)
                                 }
                             }, args);
+                        } else if (action.type === 'componentMethod') {
+                            const component = componentRefs.current[action.config.componentId];
+
+                            if (component) {
+                                component[action.config.method]?.();
+                            }
                         }
+
                     })
 
                 }
@@ -60,6 +67,7 @@ const Preview: React.FC = () => {
                     id: component.id,
                     name: component.name,
                     styles: component.styles,
+                    ref: (ref: Record<string, any>) => { componentRefs.current[component.id] = ref },
                     ...config.defaultProps,
                     ...component.props,
                     ...handleEvent(component)  // 添加事件
