@@ -1,33 +1,44 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Component, useComponentsStore } from "../stores/componentes";
 import { useComponentConfigStore } from "../stores/component-config";
 import { message } from "antd";
-import { GoToLinkConfig } from "../actions/GoToLink";
-import { ShowMessageConfig } from "../actions/ShowMessage";
+import { ActionType } from "./ActionModal";
 
-const Preview:React.FC = () => {
+const Preview: React.FC = () => {
     const { components } = useComponentsStore()
     const { componentConfig } = useComponentConfigStore();
 
-    function handleEvent(component: Component){
-        const props:Record<string,any> = {}
+    const componentRefs = useRef<Record<string, any>>({});
+
+    function handleEvent(component: Component) {
+        const props: Record<string, any> = {}
 
         componentConfig[component.name].events?.forEach((event) => {
             const eventConfig = component.props[event.name];
 
-            if(eventConfig){
-                props[event.name] = () => {
-                    eventConfig?.actions?.forEach((action: GoToLinkConfig | ShowMessageConfig ) => {
-                        if (action.type === 'goToLink' && eventConfig.url) {
-                            window.location.href = eventConfig.url;
-                        } else if (action.type === 'showMessage' && eventConfig.config) {
-                            if (eventConfig.config.type === 'success') {
-                                message.success(eventConfig.config.text);
-                            } else if (eventConfig.config.type === 'error') {
-                                message.error(eventConfig.config.text);
+            if (eventConfig) {
+                props[event.name] = (...args: any[]) => {
+                    eventConfig?.actions?.forEach((action: ActionType) => {
+                        if (action.type === 'goToLink') {
+                            window.location.href = action.url;
+                        } else if (action.type === 'showMessage') {
+                            if (action.config.type === 'success') {
+                                message.success(action.config.text);
+                            } else if (action.config.type === 'error') {
+                                message.error(action.config.text);
                             }
+                        } else if (action.type === 'customJS') {
+                            const func = new Function('context', 'args', action.code);
+                            func({
+                                name: component.name,
+                                props: component.props,
+                                showMessage(content: string) {
+                                    message.success(content)
+                                }
+                            }, args);
                         }
                     })
+
                 }
             }
         })
@@ -41,7 +52,7 @@ const Preview:React.FC = () => {
             if (!config?.prod) {
                 return null;
             }
-            
+
             return React.createElement(
                 config.prod,
                 {
@@ -60,8 +71,8 @@ const Preview:React.FC = () => {
 
     return (
         <div>
-        {renderComponents(components)}
-    </div>
+            {renderComponents(components)}
+        </div>
     )
 }
 

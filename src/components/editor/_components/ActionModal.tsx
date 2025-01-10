@@ -1,23 +1,40 @@
 import { Modal, Segmented } from "antd"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { GoToLink, GoToLinkConfig } from "../actions/GoToLink"
 import { ShowMessage, ShowMessageConfig } from "../actions/ShowMessage"
+import { CustomJS, CustomJSConfig } from "../actions/CustomJS"
 
-interface ActionModalProps {
+export interface ActionModalProps {
     visible: boolean
-    handleOk: (config?: GoToLinkConfig | ShowMessageConfig) => void
+    handleOk: (config?: ActionType) => void
     handleCancel: () => void
+    action?: ActionType,
 }
+
+export type ActionType = GoToLinkConfig | ShowMessageConfig | CustomJSConfig
 
 export function ActionModal(props: ActionModalProps) {
     const {
         visible,
         handleOk,
+        action,
         handleCancel
     } = props;
 
     const [key, setKey] = useState<string>('访问链接');
-    const [curConfig,setCurConfig] = useState<GoToLinkConfig | ShowMessageConfig>();
+    const [curConfig,setCurConfig] = useState<ActionType>();
+
+    const map = {
+        goToLink: '访问链接',
+        showMessage: "消息提示",
+        customJS: '自定义 JS'
+    }
+
+    useEffect(() => {
+        if(action?.type){
+            setKey(map[action.type])
+        }
+    },[action])
 
     return  <Modal 
         title="事件动作配置" 
@@ -33,12 +50,17 @@ export function ActionModal(props: ActionModalProps) {
             {
                 key === '访问链接' && <GoToLink onChange={(config) => {
                     setCurConfig(config)
-                }}/>
+                }} value={action?.type === 'goToLink' ? action.url : ''}/>
             }
             {
                 key === '消息提示' && <ShowMessage onChange={(config) => {
                     setCurConfig(config)
-                }}/>
+                }} value={action?.type === 'showMessage' ? action.config : undefined}/>
+            }
+            {
+                key === '自定义 JS' && <CustomJS onChange={(config) => {
+                    setCurConfig(config)
+                }} value={action?.type === 'customJS' ? action.code : ''}/>
             }
         </div>
     </Modal>

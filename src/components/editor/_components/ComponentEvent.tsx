@@ -2,24 +2,24 @@ import React, { useState } from "react";
 import { useComponentsStore } from "../stores/componentes";
 import { useComponentConfigStore } from "../stores/component-config";
 import type { ComponentEvent } from "../stores/component-config";
-import { Button, Collapse, CollapseProps} from "antd";
-import { ActionModal } from "./ActionModal";
-import { GoToLinkConfig } from "../actions/GoToLink";
-import { ShowMessageConfig } from "../actions/ShowMessage";
-import { DeleteOutlined } from "@ant-design/icons";
+import { Button, Collapse, CollapseProps, message } from "antd";
+import { ActionModal, ActionType } from "./ActionModal";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const ComponentEvent: React.FC = () => {
     const { curComponent, updateComponent } = useComponentsStore();
     const { componentConfig } = useComponentConfigStore();
     const [actionModalOpen, setActionModalOpen] = useState(false);
     const [curEvent, setCurEvent] = useState<ComponentEvent>();
+    const [curAction,setCurAction] = useState<ActionType>();
+    const [curActionIndex,setCurActionIndex] = useState<number>();
 
     if (!curComponent) return null
 
     function deleteAction(event: ComponentEvent, index: number) {
         if (!curComponent) return;
         const actions = [...curComponent.props[event.name]?.actions];
-    
+
         if (index >= 0 && index < actions.length) {
             actions.splice(index, 1);
             updateComponent(curComponent.id, {
@@ -31,7 +31,18 @@ const ComponentEvent: React.FC = () => {
             console.warn('无效的索引:', index);
         }
     }
+
+    function editAction(config: ActionType,index: number) {
+        if(!curComponent) {
+            return;
+        }
+
+        setCurAction(config)
+        setCurActionIndex(index)
+        setActionModalOpen(true);
+    }
     
+
 
     const items: CollapseProps['items'] = (componentConfig[curComponent.name].events || []).map(event => {
         return {
@@ -46,57 +57,88 @@ const ComponentEvent: React.FC = () => {
                 }}>添加动作</Button>
             </div>,
             children: <div>
-            {
-                (curComponent.props[event.name]?.actions || []).map((item: GoToLinkConfig | ShowMessageConfig, index: number) => {
-                    return <div>
-                        {
-                            item.type === 'goToLink' ? <div className='border border-[#aaa] m-[10px] p-[10px] relative'>
-                                <div className='text-[blue]'>跳转链接</div>
-                                <div>{item.url}</div>
-                                <div style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }}
-                                    onClick={() => deleteAction(event, index)}
-                                ><DeleteOutlined /></div>
-                            </div> : null
-                        }
-                        {
-                            item.type === 'showMessage' ? <div className='border border-[#aaa] m-[10px] p-[10px] relative'>
-                                <div className='text-[blue]'>消息弹窗</div>
-                                <div>{item.config.type}</div>
-                                <div>{item.config.text}</div>
-                                <div style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }}
-                                    onClick={() => deleteAction(event, index)}
-                                ><DeleteOutlined /></div>
-                            </div> : null
-                        }
-                    </div>
-                })
-            }
-        </div>
+                {
+                    (curComponent.props[event.name]?.actions || []).map((item: ActionType, index: number) => {
+                        return <div>
+                            {
+                                item.type === 'goToLink' ? <div className='border border-[#aaa] m-[10px] p-[10px] relative'>
+                                    <div className='text-[blue]'>跳转链接</div>
+                                    <div>{item.url}</div>
+                                    <div style={{position: 'absolute',top: 10, right: 30, cursor: 'pointer'}} onClick={() => editAction(item,index)}>
+                                        <EditOutlined />
+                                    </div>
+                                    <div style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }}
+                                        onClick={() => deleteAction(event, index)}
+                                    ><DeleteOutlined /></div>
+                                </div> : null
+                            }
+                            {
+                                item.type === 'showMessage' ? <div className='border border-[#aaa] m-[10px] p-[10px] relative'>
+                                    <div className='text-[blue]'>消息弹窗</div>
+                                    <div>{item.config.type}</div>
+                                    <div>{item.config.text}</div>
+                                    <div style={{position: 'absolute',top: 10, right: 30, cursor: 'pointer'}} onClick={() => editAction(item,index)}>
+                                        <EditOutlined />
+                                    </div>
+                                    <div style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }}
+                                        onClick={() => deleteAction(event, index)}
+                                    ><DeleteOutlined /></div>
+                                </div> : null
+                            }
+                            {
+                                item.type === 'customJS' ? <div key="customJS" className='border border-[#aaa] m-[10px] p-[10px] relative'>
+                                    <div className='text-[blue]'>自定义 JS</div>
+                                    <div style={{position: 'absolute',top: 10, right: 30, cursor: 'pointer'}} onClick={() => editAction(item,index)}>
+                                        <EditOutlined />
+                                    </div>
+                                    <div style={{ position: 'absolute', top: 10, right: 10, cursor: 'pointer' }}
+                                        onClick={() => deleteAction(event, index)}
+                                    ><DeleteOutlined /></div>
+                                </div> : null
+                            }
+                        </div>
+                    })
+                }
+            </div>
         }
     })
 
-    function handleModalOk(config?: GoToLinkConfig | ShowMessageConfig){
-        if(!config || !curEvent || !curComponent){
-            return
+    function handleModalOk(config?: ActionType) {
+        if(!config || !curEvent || !curComponent) {
+            return ;
         }
 
-        updateComponent(curComponent.id,  { 
-            [curEvent.name]: { 
-                actions: [
-                    ...(curComponent.props[curEvent.name]?.actions || []),
-                    config
-                ]
-            }
-        })
+        if(curAction) {
+            updateComponent(curComponent.id,  { 
+                [curEvent.name]: { 
+                    actions: curComponent.props[curEvent.name]?.actions.map((item: ActionType, index: number) => {
+                        return index === curActionIndex ? config : item;
+                    })
+                }
+            })
+            message.success('修改成功')
+        } else {
+            updateComponent(curComponent.id,  { 
+                [curEvent.name]: { 
+                    actions: [
+                        ...(curComponent.props[curEvent.name]?.actions || []),
+                        config
+                    ]
+                }
+            })
+            message.success('添加成功')
+        }
+
+        setCurAction(undefined);
 
         setActionModalOpen(false)
     }
 
     return <div className='px-[10px]'>
-        <Collapse className='mb-[10px]' items={items} defaultActiveKey={componentConfig[curComponent.name].events?.map(item => item.name)}/>
+        <Collapse className='mb-[10px]' items={items} defaultActiveKey={componentConfig[curComponent.name].events?.map(item => item.name)} />
         <ActionModal visible={actionModalOpen} handleOk={handleModalOk} handleCancel={() => {
             setActionModalOpen(false)
-        }}/>
+        }} action={curAction}/>
     </div>
 }
 
