@@ -10,36 +10,36 @@ export interface ComponentSetter {
 }
 
 export interface Component {
-    id: number;
+    id: string;
     name: string;
     props: any;
     children?: Component[];
     setter?: ComponentSetter;
-    parentId?: number;
+    parentId?: string;
     desc: string;
     styles?: CSSProperties;
 }
 
 interface State {
     components: Component[];
-    curComponentId?: number | null;
+    curComponentId?: string | null;
     curComponent: Component | null;
     mode: 'edit' | 'preview'
 }
 
 interface Action {
-    addComponent: (component: Component, parentId?: number) => void;
-    deleteComponent: (componentId: number) => void;
-    updateComponent: (componentId: number, props: any) => void;
-    setCurComponentId: (componentId: number) => void;
-    updateComponentStyles: (componentId: number, styles: CSSProperties, replace?: Boolean) => void
+    addComponent: (component: Component, parentId?: string) => void;
+    deleteComponent: (componentId: string) => void;
+    updateComponent: (componentId: string, props: any) => void;
+    setCurComponentId: (componentId: string) => void;
+    updateComponentStyles: (componentId: string, styles: CSSProperties, replace?: Boolean) => void
     setMode: (mode: State['mode']) => void;
 }
 
 const creator: StateCreator<State & Action> = (set, get) => ({
     components: [
         {
-            id: 1,
+            id: 'root',
             name: 'Page',
             props: {},
             desc: '页面'
@@ -125,7 +125,7 @@ export const useComponentsStore = create<State & Action>()(persist(creator, {
 }));
 
 export function getComponentById(
-    id: number,
+    id: string,
     components: Component[]
 ): Component | null {
     if (!id) return null;

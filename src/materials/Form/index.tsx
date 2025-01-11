@@ -1,5 +1,6 @@
 import { ComponentConfig } from "../../pages/editor/stores/component-config";
 import FormDev from "./dev";
+import FormProd from "./prod";
 
 export const FormConfig: ComponentConfig = {
     name: 'Form',
@@ -19,6 +20,6 @@ export const FormConfig: ComponentConfig = {
         }
     ],
     dev: FormDev,
-    prod: FormDev,
+    prod: FormProd,
     materialType: 'area'
 }

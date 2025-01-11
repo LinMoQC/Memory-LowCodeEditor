@@ -6,7 +6,7 @@ import { Select, TreeSelect } from "antd"
 export interface ComponentMethodConfig {
     type: 'componentMethod',
     config: {
-        componentId: number,
+        componentId: string,
         method: string
     }
 }
@@ -22,7 +22,7 @@ export function ComponentMethod(props: ComponentMehodProps) {
     const { componentConfig } = useComponentConfigStore()
     const [selectedComponent, setSelectedComponent] = useState<Component | null>()
 
-    const [curId,setCurId] = useState<number>()
+    const [curId,setCurId] = useState<string>()
     const [curMethod,setCurMethod] = useState<string>()
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export function ComponentMethod(props: ComponentMehodProps) {
         }
     },[value])
 
-    function componentChange(value: number) {
+    function componentChange(value: string) {
         if (!curComponentId) return
 
         setSelectedComponent(getComponentById(value, components))
@@ -54,37 +54,48 @@ export function ComponentMethod(props: ComponentMehodProps) {
         })
     }
 
-    return <div className="mt-[40px]">
-        <div className="flex items-center gap-[10px]">
-            <div>组件：</div>
-            <div>
+    return (
+        <div className="mt-[40px] space-y-[20px]">
+            {/* 组件选择 */}
+            <div className="flex items-center gap-[16px]">
+                <div className="w-[80px] text-right text-gray-600">组件：</div>
                 <TreeSelect
-                    style={{ width: 500, height: 50 }}
+                    className="flex-1"
+                    style={{
+                        maxWidth: '500px',
+                        height: '45px',
+                    }}
                     treeData={components}
                     fieldNames={{
                         label: 'name',
-                        value: 'id'
+                        value: 'id',
                     }}
                     value={curId}
-                    onChange={(value) => { componentChange(value) }}
+                    placeholder="请选择组件"
+                    onChange={(value) => componentChange(value)}
                 />
             </div>
-        </div>
-        {componentConfig[selectedComponent?.name || ''] && (
-            <Fragment>
-                <div className='flex items-center gap-[10px] mt-[20px]'>
-                    <div>方法：</div>
-                    <div>
-                        <Select
-                            style={{ width: 500, height: 50 }}
-                            options={componentConfig[selectedComponent?.name || ''].methods?.map(
-                                method => ({ label: method.label, value: method.name })
-                            )}
-                            value={curMethod}
-                            onChange={(value) => { componentMethodChange(value)}} />
-                    </div>
+    
+            {/* 方法选择 */}
+            {componentConfig[selectedComponent?.name || ''] && (
+                <div className="flex items-center gap-[16px]">
+                    <div className="w-[80px] text-right text-gray-600">方法：</div>
+                    <Select
+                        className="flex-1"
+                        style={{
+                            maxWidth: '500px',
+                            height: '45px',
+                        }}
+                        options={componentConfig[selectedComponent?.name || ''].methods?.map((method) => ({
+                            label: method.label,
+                            value: method.name,
+                        }))}
+                        value={curMethod}
+                        placeholder="请选择方法"
+                        onChange={(value) => componentMethodChange(value)}
+                    />
                 </div>
-            </Fragment>
-        )}
-    </div>
+            )}
+        </div>
+    );    
 }

@@ -4,7 +4,7 @@ import { getComponentById, useComponentsStore } from "../stores/componentes";
 
 interface HoverMaskProps {
     containerClassName: string;
-    componentId: number;
+    componentId: string;
     portalWrapperClassName: string
 }
 

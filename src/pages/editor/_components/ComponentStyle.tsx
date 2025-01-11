@@ -35,7 +35,6 @@ const ComponentStyle: React.FC = () => {
                 css[name.replace(/-\w/, (item) => item.toUpperCase().replace('-', ''))] = value;
             });
 
-            console.log(css);
             updateComponentStyles(curComponentId, { ...form.getFieldsValue(), ...css }, true)
         } catch (e) { }
     }, 500)
@@ -62,11 +61,11 @@ const ComponentStyle: React.FC = () => {
         const { type, options } = setting;
 
         if (type === 'select') {
-            return <Select options={options} />
+            return <Select options={options} className="w-[100%]"/>
         } else if (type === 'input') {
-            return <Input />
+            return <Input className="w-[100%]"/>
         } else if (type === 'inputNumber') {
-            return <InputNumber />
+            return <InputNumber className="w-[100%]"/>
         }
     }
 
@@ -80,8 +79,9 @@ const ComponentStyle: React.FC = () => {
         <Form
             form={form}
             onValuesChange={valueChange}
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 14 }}
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 18 }}
+            style={{ width: '100%' }}
         >
             {
                 componentConfig[curComponent.name]?.stylesSetter?.map(setter => (

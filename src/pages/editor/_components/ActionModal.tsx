@@ -48,7 +48,7 @@ export function ActionModal(props: ActionModalProps) {
         onCancel={handleCancel}
     >
         <div className="h-[500px]">
-            <Segmented value={key} onChange={setKey} block options={['访问链接', '消息提示', '组件方法','自定义 JS']} />
+            <Segmented value={key} onChange={setKey} block options={['访问链接', '消息提示', '组件方法','自定义 JS']} size="large"/>
             {
                 key === '访问链接' && <GoToLink onChange={(config) => {
                     setCurConfig(config)

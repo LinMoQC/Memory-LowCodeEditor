@@ -6,10 +6,10 @@ import { message } from "antd";
 export interface ItemType {
     type: string;
     dragType?: 'move' | 'add',
-    id: number
+    id: string
 }
 
-export function useMaterailDrop(accept: string[], id: number) {
+export function useMaterailDrop(accept: string[], id: string) {
     const { addComponent, deleteComponent, components } = useComponentsStore();
     const { componentConfig } = useComponentConfigStore();
 
@@ -27,9 +27,8 @@ export function useMaterailDrop(accept: string[], id: number) {
                 addComponent(component, id)
             } else {
                 const config = componentConfig[item.type];
-
                 addComponent({
-                    id: new Date().getTime(),
+                    id: `${item.type}_${new Date().getTime()}`,
                     name: item.type,
                     props: config.defaultProps,
                     desc: config.desc,

@@ -52,7 +52,7 @@ const Form:React.FC<FormProps> = (props) => {
         ref={divRef}
         data-component-id={id}
     >
-        <AntdForm labelCol={{ span: 6 }} wrapperCol={{ span: 18 }} form={form} onFinish={(values) =>{
+        <AntdForm labelCol={{ span: 2 }} wrapperCol={{ span: 22 }} form={form} onFinish={(values) =>{
             onFinish && onFinish(values)
         }}>
             {formItems.map((item: any) => {

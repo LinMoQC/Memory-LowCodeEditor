@@ -8,7 +8,7 @@ const EditArea:React.FC = () => {
     const {components,curComponentId,setCurComponentId} = useComponentsStore();
     const { componentConfig } = useComponentConfigStore();
 
-    const [hoverComponentId, setHoverComponentId] = useState<number>();
+    const [hoverComponentId, setHoverComponentId] = useState<string>();
 
     const handleMouseOver: MouseEventHandler = (e) => {
         const path = e.nativeEvent.composedPath();
@@ -18,7 +18,7 @@ const EditArea:React.FC = () => {
 
             const componentId = ele.dataset?.componentId;
             if(componentId){
-                setHoverComponentId(+componentId);
+                setHoverComponentId(componentId);
                 return
             }
         }
@@ -33,11 +33,11 @@ const EditArea:React.FC = () => {
             const componentId = ele.dataset?.componentId;
             if(componentId){
                 // 两次点击同一个组件取消选中
-                if(+componentId === curComponentId){
-                    setCurComponentId(0);
+                if(componentId === curComponentId){
+                    setCurComponentId('');
                     return
                 }
-                setCurComponentId(+componentId);
+                setCurComponentId(componentId);
                 return
             }
         }

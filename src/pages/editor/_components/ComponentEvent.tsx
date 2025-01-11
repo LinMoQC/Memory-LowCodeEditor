@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { getComponentById, useComponentsStore } from "../stores/componentes";
 import { useComponentConfigStore } from "../stores/component-config";
 import type { ComponentEvent } from "../stores/component-config";
-import { Button, Collapse, CollapseProps, message } from "antd";
+import { Button, Collapse, CollapseProps, Empty, message } from "antd";
 import { ActionModal, ActionType } from "./ActionModal";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 
 const ComponentEvent: React.FC = () => {
-    const { curComponent, updateComponent,components } = useComponentsStore();
+    const { curComponent, updateComponent, components } = useComponentsStore();
     const { componentConfig } = useComponentConfigStore();
     const [actionModalOpen, setActionModalOpen] = useState(false);
     const [curEvent, setCurEvent] = useState<ComponentEvent>();
@@ -149,10 +149,14 @@ const ComponentEvent: React.FC = () => {
     }
 
     return <div className='px-[10px]'>
-        <Collapse className='mb-[10px]' items={items} defaultActiveKey={componentConfig[curComponent.name].events?.map(item => item.name)} />
-        <ActionModal visible={actionModalOpen} handleOk={handleModalOk} handleCancel={() => {
-            setActionModalOpen(false)
-        }} action={curAction} />
+        {!componentConfig[curComponent.name].events?.length ? <div>
+            <Empty description={<span>该组件没有事件～</span>}/>
+        </div> : <Fragment>
+            <Collapse className='mb-[10px]' items={items} defaultActiveKey={componentConfig[curComponent.name].events?.map(item => item.name)} />
+            <ActionModal visible={actionModalOpen} handleOk={handleModalOk} handleCancel={() => {
+                setActionModalOpen(false)
+            }} action={curAction} />
+        </Fragment>}
     </div>
 }
 

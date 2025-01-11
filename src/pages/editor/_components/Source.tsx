@@ -1,6 +1,7 @@
 import MonacoEditor, { OnMount } from '@monaco-editor/react'
-import React from "react";
+import React, { Fragment } from "react";
 import { useComponentsStore } from "../stores/componentes";
+import Loading from '../../../common/loading';
 
 const Source: React.FC = () => {
     const { components } = useComponentsStore();
@@ -13,6 +14,9 @@ const Source: React.FC = () => {
     return <MonacoEditor
         height={'100%'}
         path='components.json'
+        loading={<Fragment>
+            <Loading />
+        </Fragment>}
         language='json'
         onMount={handleEditorMount}
         value={JSON.stringify(components, null, 2)}

@@ -1,4 +1,4 @@
-import { Segmented } from "antd";
+import { Empty, Segmented } from "antd";
 import { useComponentsStore } from "../stores/componentes";
 import { useState } from "react";
 import ComponentAttr from "./ComponentAttr";
@@ -9,7 +9,7 @@ const Setting: React.FC = () => {
     const {curComponent} = useComponentsStore();
 
     const [key, setKey] = useState<string>("属性");
-    if(!curComponent) return null
+    if(!curComponent) return <Empty description={<span>请选中组件～</span>} className="mt-20"/>
 
     return (
         <div className="ml-2 mr-2 mt-2">

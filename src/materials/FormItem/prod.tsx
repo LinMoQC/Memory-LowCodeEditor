@@ -44,7 +44,7 @@ const FormItem: ForwardRefRenderFunction<FormRef, FormItemProps> = ({ children, 
         onFinish(values);
     }
 
-    return <AntdForm name='form' labelCol={{ span: 5 }} wrapperCol={{ span: 18 }} form={form} onFinish={save}>
+    return <AntdForm name='form' labelCol={{ span: 2 }} wrapperCol={{ span: 18 }} form={form} onFinish={save}>
         {formItems.map((item: any) => {
             return (
                 <AntdForm.Item
@@ -58,8 +58,8 @@ const FormItem: ForwardRefRenderFunction<FormRef, FormItemProps> = ({ children, 
                         }] : []
                     }
                 >
-                    {item.type === 'input' && <Input />}
-                    {item.type === 'date' && <DatePicker />}
+                    {item.type === 'input' && <Input className="w-[100%]"/>}
+                    {item.type === 'date' && <DatePicker className="w-[100%]"/>}
                 </AntdForm.Item>
             )
         })}

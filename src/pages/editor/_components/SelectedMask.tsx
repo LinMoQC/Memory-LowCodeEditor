@@ -7,7 +7,7 @@ import { DeleteOutlined } from "@ant-design/icons";
 interface SelectedMaskProps {
     portalWrapperClassName: string
     containerClassName: string
-    componentId: number;
+    componentId: string;
 }
 
 const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
@@ -104,7 +104,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
 
     function handleDelete() {
         deleteComponent(curComponentId!);
-        setCurComponentId(0);
+        setCurComponentId('');
         message.success('删除成功');
     }
     return createPortal((
@@ -154,7 +154,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
                     }}>
                         {curComponent?.desc}
                     </div>
-                    {curComponentId !== 1 && (
+                    {curComponentId !== 'root' && (
                         <div style={{
                             padding: '0 8px',
                             backgroundColor: 'blue',

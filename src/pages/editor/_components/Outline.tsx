@@ -11,7 +11,7 @@ const Outline:React.FC = () => {
         showLine
         defaultExpandAll
         onSelect={([selectedKey]) => {
-            setCurComponentId(selectedKey as number);
+            setCurComponentId(selectedKey as string);
         }}
         />
     )

@@ -9,7 +9,7 @@ export const FormItemConfig = {
         name: new Date().getTime(),
         label: '姓名'
     },
-    dev: FormItemDev,
+    dev: FormItemProd,
     prod: FormItemProd,
     setter: [
         {

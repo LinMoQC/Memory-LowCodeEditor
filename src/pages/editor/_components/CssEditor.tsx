@@ -1,5 +1,7 @@
 import MonacoEditor, { OnMount, EditorProps } from '@monaco-editor/react'
 import { editor } from "monaco-editor";
+import { Fragment } from 'react/jsx-runtime';
+import Loading from '../../../common/loading';
 
 export interface EditorFile {
     name: string;
@@ -28,6 +30,9 @@ export default function (props: Props) {
             width={"100%"}
             className='z-20'
             path='component.css'
+            loading={<Fragment>
+                <Loading />
+            </Fragment>}
             language='css'
             onMount={handleEditorMount}
             onChange={onChange}
@@ -43,6 +48,7 @@ export default function (props: Props) {
                         verticalScrollbarSize: 6,
                         horizontalScrollbarSize: 6,
                     },
+                    fixedOverflowWidgets: true, // 防止提示框溢出编辑器
                     ...options
                 }
             }

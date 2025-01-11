@@ -58,30 +58,37 @@ export function ShowMessage(props: ShowMessageProps) {
         })
     }
 
-    return <div className='mt-[30px]'>
-        <div className='flex items-center gap-[20px]'>
-            <div>类型：</div>
-            <div>
-            <Select
-                style={{ width: 500, height: 50 }}
-                options={[
-                    { label: '成功', value: 'success' },
-                    { label: '失败', value: 'error' },
-                ]}
-                onChange={(value) => { messageTypeChange(value) }}
-                value={type}
-            />
+    return (
+        <div className="mt-[30px] space-y-[40px]">
+            {/* 类型选择 */}
+            <div className="flex items-center gap-[16px]">
+                <div className="w-[80px] text-right text-gray-600">类型：</div>
+                <Select
+                    style={{ width: '100%', maxWidth: '500px', height: '45px' }}
+                    options={[
+                        { label: '成功', value: 'success' },
+                        { label: '失败', value: 'error' },
+                    ]}
+                    onChange={(value) => messageTypeChange(value)}
+                    value={type}
+                />
             </div>
-        </div>
-        <div className='flex items-center gap-[20px] mt-[50px]'>
-            <div>文本：</div>
-                <div>
+    
+            {/* 文本输入 */}
+            <div className="flex items-center gap-[16px]">
+                <div className="w-[80px] text-right text-gray-600">文本：</div>
                 <Input
-                    style={{ width: 500, height: 50 }}
-                    onChange={(e) => { messageTextChange(e.target.value) }}
+                    style={{
+                        width: '100%',
+                        maxWidth: '500px',
+                        height: '45px',
+                        padding: '8px',
+                    }}
+                    onChange={(e) => messageTextChange(e.target.value)}
                     value={text}
+                    placeholder="请输入文本内容"
                 />
             </div>
         </div>
-    </div>
+    );
 }
