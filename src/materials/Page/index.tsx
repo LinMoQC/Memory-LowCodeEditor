@@ -7,5 +7,6 @@ export const PageConfig: ComponentConfig = {
     defaultProps: {},
     dev: PageDev,
     prod: PageProd,
-    desc: '页面'
+    desc: '页面',
+    materialType: 'area'
 }

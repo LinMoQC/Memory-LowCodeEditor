@@ -48,5 +48,6 @@ export const ButtonConfig: ComponentConfig = {
     ],
     dev: ButtonDev,
     prod: ButtonProd,
-    desc: '按钮'
+    desc: '按钮',
+    materialType: 'unit'
 }

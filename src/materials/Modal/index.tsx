@@ -37,5 +37,6 @@ export const  ModalConfig: ComponentConfig = {
     ],
     desc: '弹窗',
     dev: ModalDev,
-    prod: ModalProd
+    prod: ModalProd,
+    materialType: 'area'
 }

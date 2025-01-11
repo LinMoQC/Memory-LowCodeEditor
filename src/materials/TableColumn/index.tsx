@@ -38,4 +38,5 @@ export const TableColumnConfig: ComponentConfig = {
     ],
     dev: TableColumnDev,
     prod: TableColumnProd,
+    materialType: 'unit'
 }

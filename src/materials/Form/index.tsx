@@ -19,5 +19,6 @@ export const FormConfig: ComponentConfig = {
         }
     ],
     dev: FormDev,
-    prod: FormDev
+    prod: FormDev,
+    materialType: 'area'
 }

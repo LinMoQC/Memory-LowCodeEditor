@@ -9,6 +9,9 @@ import { TableColumnConfig } from "../../../materials/TableColumn";
 import { FormConfig } from "../../../materials/Form";
 import { FormItemConfig } from "../../../materials/FormItem";
 
+// 物料类型
+export type MaterialType = 'unit' | 'area' | 'special'
+
 export interface ComponentConfig {
     name: string;
     defaultProps: Record<string, any>;
@@ -18,7 +21,8 @@ export interface ComponentConfig {
     dev: any;
     prod: any;
     events?: ComponentEvent[]
-    methods?: ComponentMethod[]
+    methods?: ComponentMethod[],
+    materialType: MaterialType,
 }
 
 // 组件事件

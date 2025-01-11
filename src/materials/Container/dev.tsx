@@ -12,7 +12,7 @@ const Container = ({ id, name, children, styles }: CommonComponentProps) => {
         item: {
             type: name,
             dragType: 'move',
-            id: id
+            id: id,
         }
     })
 

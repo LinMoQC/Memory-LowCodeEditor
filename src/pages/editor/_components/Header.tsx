@@ -6,8 +6,11 @@ const Header: React.FC = () => {
     const { mode, setMode, setCurComponentId } = useComponentsStore();
     return (
         <div className='w-[100%] h-[100%]'>
-            <div className='h-[50px] flex justify-between items-center px-[20px]'>
-                <div>Memory Flow -- 仿BliBili Rush低代码平台简易版</div>
+            <div className='h-[100%] flex justify-between items-center px-[20px]'>
+                <h2 className='text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 
+                    tracking-wider leading-tight italic'>
+                    Memory Flow
+                </h2>
                 <Space>
                     {mode === 'edit' && (
                         <Button

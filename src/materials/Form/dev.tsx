@@ -27,7 +27,7 @@ const Form:React.FC<FormProps> = (props) => {
         item: {
             type: name,
             dragType: 'move',
-            id: id
+            id: id,
         }
     });
 

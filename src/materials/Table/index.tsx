@@ -14,6 +14,7 @@ export const TableConfig: ComponentConfig = {
         },
     ],
     dev: TableDev,
-    prod: TableDev
+    prod: TableDev,
+    materialType: 'area'
 }
 

@@ -7,5 +7,6 @@ export const ContainerConfig: ComponentConfig = {
     defaultProps: {},
     dev: ContainerDev,
     prod: ContainerProd,
-    desc: '容器'
+    desc: '容器',
+    materialType: 'area',
 }
