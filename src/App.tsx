@@ -1,5 +1,5 @@
 import { DndProvider } from "react-dnd"
-import Editor from "./components/editor"
+import Editor from "./pages/editor"
 import { HTML5Backend } from "react-dnd-html5-backend"
 
 function App() {

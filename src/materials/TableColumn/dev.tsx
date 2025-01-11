@@ -1,5 +1,5 @@
 import React from "react";
-import { CommonComponentProps } from "../../components/editor/interface";
+import { CommonComponentProps } from "../../pages/editor/interface";
 
 interface TableColumnProps extends CommonComponentProps {
 

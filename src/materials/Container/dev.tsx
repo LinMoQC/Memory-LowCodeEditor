@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useDrag } from 'react-dnd';
-import { CommonComponentProps } from '../../components/editor/interface';
-import { useMaterailDrop } from '../../components/editor/hooks/useMaterialDrop';
+import { CommonComponentProps } from '../../pages/editor/interface';
+import { useMaterailDrop } from '../../pages/editor/hooks/useMaterialDrop';
 
 const Container = ({ id, name, children, styles }: CommonComponentProps) => {
     const { canDrop, drop } = useMaterailDrop(['Button', 'Container','Table','Form'], id);

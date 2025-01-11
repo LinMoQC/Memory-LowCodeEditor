@@ -1,6 +1,6 @@
 import React from "react";
 import { FormProps } from "antd";
-import { CommonComponentProps } from "../../components/editor/interface";
+import { CommonComponentProps } from "../../pages/editor/interface";
 
 interface FormItemProps extends CommonComponentProps {
 

@@ -1,6 +1,6 @@
 import { Button as AntdButton } from "antd";
 import { useDrag } from "react-dnd";
-import { CommonComponentProps } from "../../components/editor/interface";
+import { CommonComponentProps } from "../../pages/editor/interface";
 
 const Button = ({ id,type, text,styles }: CommonComponentProps) => {
     const [_,darg] = useDrag({

@@ -1,4 +1,4 @@
-import { CommonComponentProps } from "../../components/editor/interface";
+import { CommonComponentProps } from "../../pages/editor/interface";
 
 
 const Container = ({ id, children, styles }: CommonComponentProps) => {

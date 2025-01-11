@@ -21,14 +21,19 @@ export function MaterialItem(props: MaterialItemProps) {
 
     return <div
         className='
-            border-dashed
+            rounded-md
             border-[1px]
-            border-[#000]
-            py-[8px] px-[10px] 
+            border-[#ccc]
+            w-[130px] h-[40px]
+            box-border
             m-[10px]
             cursor-move
-            inline-block
+            inline-flex
+            px-4
+            items-center
             bg-white
+            font-mono
+            text-sm
             hover:bg-[#ccc]
         '
         ref={drag}

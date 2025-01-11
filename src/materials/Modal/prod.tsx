@@ -1,6 +1,6 @@
 import React, { useImperativeHandle, useState, forwardRef } from "react";
 import { Modal as AntdModal } from 'antd';
-import { CommonComponentProps } from "../../components/editor/interface";
+import { CommonComponentProps } from "../../pages/editor/interface";
 
 export interface ModalRef {
     open: () => void;

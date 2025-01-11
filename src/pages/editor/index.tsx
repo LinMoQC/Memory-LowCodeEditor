@@ -12,7 +12,7 @@ interface EditorProps {
 
 }
 
-const Editor: React.FC<EditorProps> = (props) => {
+const Editor: React.FC<EditorProps> = () => {
     const { mode } = useComponentsStore();
 
     return (
@@ -23,7 +23,7 @@ const Editor: React.FC<EditorProps> = (props) => {
 
             {
                 mode === 'edit' ? <Allotment>
-                <Allotment.Pane preferredSize={240} maxSize={300} minSize={200}>
+                <Allotment.Pane preferredSize={240} maxSize={300} minSize={300}>
                     <MaterialWrapper />
                 </Allotment.Pane>
                 <Allotment.Pane>

@@ -1,4 +1,4 @@
-import { ComponentConfig } from "../../components/editor/stores/component-config";
+import { ComponentConfig } from "../../pages/editor/stores/component-config";
 import FormDev from "./dev";
 
 export const FormConfig: ComponentConfig = {

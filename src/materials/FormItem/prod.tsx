@@ -1,7 +1,7 @@
 import React, { ForwardRefRenderFunction, useImperativeHandle, useMemo } from "react";
 import { Form as AntdForm, DatePicker, Input } from 'antd';
 import dayjs from "dayjs";
-import { CommonComponentProps } from "../../components/editor/interface";
+import { CommonComponentProps } from "../../pages/editor/interface";
 
 interface FormItemProps extends CommonComponentProps {
     onFinish: (value: any) => void

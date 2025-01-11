@@ -1,4 +1,4 @@
-import { CommonComponentProps } from "../../components/editor/interface"
+import { CommonComponentProps } from "../../pages/editor/interface"
 
 interface TableProps extends CommonComponentProps {
 

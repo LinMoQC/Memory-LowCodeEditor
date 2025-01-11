@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Table as AntdTable } from 'antd';
 import dayjs from "dayjs";
-import { CommonComponentProps } from "../../components/editor/interface";
+import { CommonComponentProps } from "../../pages/editor/interface";
 
 const TestData = [
     { name: '光光', sex: '男', birthday: new Date('1994-07-07').getTime() },

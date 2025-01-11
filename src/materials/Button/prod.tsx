@@ -1,5 +1,5 @@
 import { Button as AntdButton } from 'antd';
-import { CommonComponentProps } from '../../components/editor/interface';
+import { CommonComponentProps } from '../../pages/editor/interface';
 
 const Button = ({ id, type, text, styles,...props }: CommonComponentProps) => {
     return (

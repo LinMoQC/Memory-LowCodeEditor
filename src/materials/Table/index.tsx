@@ -1,4 +1,4 @@
-import { ComponentConfig } from "../../components/editor/stores/component-config";
+import { ComponentConfig } from "../../pages/editor/stores/component-config";
 import TableDev from "./dev";
 import TableProd from "./prod";
 

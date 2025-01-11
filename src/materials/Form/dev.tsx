@@ -2,8 +2,8 @@ import { Form as AntdForm, Input } from 'antd';
 import { useDrag } from 'react-dnd';
 import { useEffect, useMemo, useRef } from 'react';
 import React from 'react';
-import { CommonComponentProps } from '../../components/editor/interface';
-import { useMaterailDrop } from '../../components/editor/hooks/useMaterialDrop';
+import { CommonComponentProps } from '../../pages/editor/interface';
+import { useMaterailDrop } from '../../pages/editor/hooks/useMaterialDrop';
 
 interface FormProps extends CommonComponentProps{
     onFinish: (values: any) => void
