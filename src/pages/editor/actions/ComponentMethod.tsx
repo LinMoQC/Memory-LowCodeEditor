@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useComponentConfigStore } from "../stores/component-config"
 import { Component, getComponentById, useComponentsStore } from "../stores/componentes"
 import { Select, TreeSelect } from "antd"

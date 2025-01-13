@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useState } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import { useComponentConfigStore } from "../stores/component-config";
 import { Component, useComponentsStore } from "../stores/componentes"
 import HoverMask from "./HoverMask";
