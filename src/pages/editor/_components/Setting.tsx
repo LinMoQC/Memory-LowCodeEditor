@@ -1,18 +1,12 @@
 import { Empty, Segmented } from "antd";
 import { useComponentsStore } from "../stores/componentes";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ComponentAttr from "./ComponentAttr";
 import ComponentEvent from "./ComponentEvent";
 import ComponentStyle from "./ComponentStyle";
 
 const Setting: React.FC = () => {
     const {curComponent} = useComponentsStore();
-        useEffect(() => {
-                console.log('组件加载...')
-                return () => {
-                    console.log('组件卸载...')
-                }
-            },[])
 
     const [key, setKey] = useState<string>("属性");
     if(!curComponent) return <Empty description={<span>未选中组件～</span>} className="mt-20"/>

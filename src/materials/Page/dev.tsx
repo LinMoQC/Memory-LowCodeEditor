@@ -3,7 +3,7 @@ import { CommonComponentProps } from "../../pages/editor/interface";
 
 
 function Page({id,name,children,styles}: CommonComponentProps) {
-    const {canDrop,drop} = useMaterailDrop(['Button','Container','Modal','Table','Form'],id);
+    const {canDrop,drop} = useMaterailDrop(['Button','Container','Modal','Table','Form','FlexContainer'],id);
 
     return (
         <div className="p-[20px] h-[100%] box-border"

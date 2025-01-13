@@ -8,6 +8,8 @@ import { TableConfig } from "../../../materials/Table";
 import { TableColumnConfig } from "../../../materials/TableColumn";
 import { FormConfig } from "../../../materials/Form";
 import { FormItemConfig } from "../../../materials/FormItem";
+import { FlexContainerConfig } from "../../../materials/FlexContainer";
+import { FlexItemConfig } from "../../../materials/FlexItem";
 
 // 物料类型
 export type MaterialType = 'unit' | 'area' | 'special'
@@ -53,7 +55,9 @@ export const useComponentConfigStore = create<State & Action>((set) => ({
         Table: TableConfig,
         TableColumn: TableColumnConfig,
         Form: FormConfig,
-        FormItem: FormItemConfig
+        FormItem: FormItemConfig,
+        FlexContainer: FlexContainerConfig,
+        FlexItem: FlexItemConfig
     },
     registerComponent: (name, componentConfig) => set((state) => {
         return {

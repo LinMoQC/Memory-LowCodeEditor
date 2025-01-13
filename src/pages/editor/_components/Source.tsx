@@ -20,6 +20,7 @@ const Source: React.FC = () => {
         language='json'
         onMount={handleEditorMount}
         value={JSON.stringify(components, null, 2)}
+        // onChange={(value) => {console.log(value)}}
         options={
             {
                 fontSize: 14,
@@ -30,7 +31,8 @@ const Source: React.FC = () => {
                 scrollbar: {
                     verticalScrollbarSize: 6,
                     horizontalScrollbarSize: 6,
-                }
+                },
+                readOnly: true
             }
         }
     />

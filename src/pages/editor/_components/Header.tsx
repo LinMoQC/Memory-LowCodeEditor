@@ -1,6 +1,8 @@
 import React from "react";
 import { useComponentsStore } from "../stores/componentes";
 import { Button, Space } from "antd";
+import { FaRegEdit } from "react-icons/fa";
+import { VscOpenPreview } from "react-icons/vsc";
 
 const Header: React.FC = () => {
     const { mode, setMode, setCurComponentId } = useComponentsStore();
@@ -16,9 +18,12 @@ const Header: React.FC = () => {
                         <Button
                             onClick={() => {
                                 setMode('preview');
-                                setCurComponentId(0);
+                                setCurComponentId('');
                             }}
-                            type='primary'
+                            // type='dashed'
+                            variant="filled"
+                            color="primary"
+                            icon={<VscOpenPreview />}
                         >
                             预览
                         </Button>
@@ -26,7 +31,10 @@ const Header: React.FC = () => {
                     {mode === 'preview' && (
                         <Button
                             onClick={() => { setMode('edit') }}
-                            type='primary'
+                            // type='text'
+                            variant="filled"
+                            color="purple"
+                            icon={<FaRegEdit />}
                         >
                             编辑
                         </Button>
