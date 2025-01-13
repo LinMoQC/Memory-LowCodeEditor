@@ -21,19 +21,23 @@ const Editor: React.FC<EditorProps> = () => {
                 <Header />
             </div>
 
-            {
-                mode === 'edit' ? <Allotment>
-                <Allotment.Pane preferredSize={320} maxSize={320} minSize={320}>
-                    <MaterialWrapper />
-                </Allotment.Pane>
-                <Allotment.Pane>
-                    <EditArea />
-                </Allotment.Pane>
-                <Allotment.Pane preferredSize={300} maxSize={300} minSize={300}>
-                    <Setting />
-                </Allotment.Pane>
-            </Allotment> : <Preview />
-            }
+            <div style={{ display: mode === 'edit' ? 'block' : 'none', height: '100%' }}>
+                <Allotment>
+                    <Allotment.Pane preferredSize={320} maxSize={320} minSize={320}>
+                        <MaterialWrapper />
+                    </Allotment.Pane>
+                    <Allotment.Pane>
+                        <EditArea />
+                    </Allotment.Pane>
+                    <Allotment.Pane preferredSize={300} maxSize={300} minSize={300}>
+                        <Setting />
+                    </Allotment.Pane>
+                </Allotment>
+            </div>
+
+            <div style={{ display: mode === 'preview' ? 'block' : 'none', height: '100%' }}>
+                <Preview />
+            </div>
         </div>
     )
 }

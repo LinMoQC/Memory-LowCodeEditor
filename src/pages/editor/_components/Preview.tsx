@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Component, useComponentsStore } from "../stores/componentes";
 import { useComponentConfigStore } from "../stores/component-config";
 import { message } from "antd";
@@ -78,8 +78,10 @@ const Preview: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className="bg-[#f7f7f9] w-[100%] h-[100%] p-5">
+            <div className="bg-white shadow-lg min-h-[100%] rounded-md">
             {renderComponents(components)}
+            </div>
         </div>
     )
 }
