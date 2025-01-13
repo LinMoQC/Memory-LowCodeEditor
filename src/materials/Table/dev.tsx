@@ -46,11 +46,14 @@ const Table:React.FC<TableProps> = (props) => {
 
     return (
         <div
-            className={`w-[100%] ${canDrop ? 'border-[2px] border-[blue]' : 'border-[1px] border-[#000]'}`}
+            className={`w-[100%] ${canDrop ? 'border-[2px] border-[blue]' : 'border-[2px] border-[#f0f3f9]'}`}
             ref={divRef}
             data-component-id={id}
             style={styles}
         >
+            <div className='w-[100%] h-10 border-b-[1px] bg-[#f7f8fa] p-2'>
+            <span className='font-light text-sm'>表格</span>
+        </div>
             <AntdTable
                 columns={columns}
                 dataSource={[]}

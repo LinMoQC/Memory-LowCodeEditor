@@ -10,9 +10,10 @@ function Modal({ id, children, title, styles }: CommonComponentProps) {
             ref={drop}
             style={styles}
             data-component-id={id}  
-            className={`min-h-[100px] p-[20px] ${ canDrop ? 'border-[2px] border-[blue]' : 'border-[1px] border-[#000]'}`}
+            className={`min-h-[100px] p-[20px] border-dashed bg-[rgba(10,19,37,.05)] -mt-[1px]
+                ${ canDrop ? 'border-[2px] border-[blue]' : 'border-[2px] border-[#ced0d3]'}`}
         >
-            <h4>{title}</h4>
+            <h4 className="text-[#b8babf]">{title}</h4>
             <div>
                 {children}
             </div>

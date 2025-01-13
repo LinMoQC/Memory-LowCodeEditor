@@ -48,10 +48,17 @@ const Form:React.FC<FormProps> = (props) => {
     }, [children]);
     
     return <div
-        className={`w-[100%] p-[20px] min-h-[100px] ${canDrop ? 'border-[2px] border-[blue]' : 'border-[1px] border-[#000]'}`}
+        className={`
+            w-[100%] min-h-[100px] rounded-[4px]
+            ${canDrop ? 'border-[2px] border-[blue]' : 'border-[2px] border-solid border-[#e8e9eb]'}
+            `}
         ref={divRef}
         data-component-id={id}
     >
+        <div className='w-[100%] h-10 border-b-[2px] bg-[#f7f8fa] p-2'>
+            <span className='font-light text-sm'>表单</span>
+        </div>
+        <div className='w-[100%] p-4'>
         <AntdForm labelCol={{ span: 2 }} wrapperCol={{ span: 22 }} form={form} onFinish={(values) =>{
             onFinish && onFinish(values)
         }}>
@@ -61,6 +68,7 @@ const Form:React.FC<FormProps> = (props) => {
                 </AntdForm.Item>
             })}
         </AntdForm>
+        </div>
     </div>
 }
 

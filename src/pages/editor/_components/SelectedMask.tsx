@@ -113,7 +113,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
                 position: "absolute",
                 left: position.left,
                 top: position.top,
-                backgroundColor: "rgba(0,0,255,0.1)",
+                backgroundColor: "rgba(0,0,255,0.2)",
                 border: "1px dashed blue",
                 pointerEvents: "none",
                 width: position.width,
@@ -158,6 +158,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
                         <div style={{
                             padding: '0 8px',
                             backgroundColor: 'blue',
+                            borderRadius: 4,
                         }}>
                             <Popconfirm
                                 title="确认删除？"
