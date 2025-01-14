@@ -1,9 +1,8 @@
 import React, { useMemo, useRef } from "react";
 import { Component, useComponentsStore } from "../stores/componentes";
 import { useComponentConfigStore } from "../stores/component-config";
-import { Empty, message } from "antd";
+import { message } from "antd";
 import { ActionType } from "./ActionModal";
-import empty from '../../../assets/empty.jpg'
 import EmptyStatus from "../../../common/empty";
 
 const Preview: React.FC = () => {
