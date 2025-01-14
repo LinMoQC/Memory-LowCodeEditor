@@ -4,6 +4,7 @@ import { useComponentConfigStore } from "../stores/component-config";
 import { Empty, message } from "antd";
 import { ActionType } from "./ActionModal";
 import empty from '../../../assets/empty.jpg'
+import EmptyStatus from "../../../common/empty";
 
 const Preview: React.FC = () => {
     const { components } = useComponentsStore()
@@ -85,15 +86,13 @@ const Preview: React.FC = () => {
     return (
         <div className="bg-[#f7f7f9] w-[100%] h-[100%] p-5">
             <div className="bg-white shadow-lg min-h-[100%] rounded-md" style={{position: 'relative'}}>
-            {isEmpty ? renderComponents(components) : <Empty 
-                image={<img
-                    src={empty}
-                    alt="Custom Empty"
-                    style={{ width: 400, height: 400 }}
-                />}
-                description={''}
-                className="absolute top-[30%] left-[48%] -translate-x-1/2 -translate-y-1/2"
-            />}
+            {isEmpty ? renderComponents(components) : <div className="absolute top-[40%] left-[48%] -translate-x-1/2 -translate-y-1/2">
+                <EmptyStatus 
+                description={'您还没有添加物料～'}
+                width={400}
+                height={400}
+            />
+                </div>}
             </div>
         </div>
     )

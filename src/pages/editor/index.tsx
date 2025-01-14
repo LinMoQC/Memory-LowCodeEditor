@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Allotment } from "allotment"
 import 'allotment/dist/style.css';
 import Header from "./_components/Header";
@@ -14,6 +14,10 @@ interface EditorProps {
 
 const Editor: React.FC<EditorProps> = () => {
     const { mode } = useComponentsStore();
+
+    // useEffect(() => {
+    //     throw new Error
+    // }, [])
 
     return (
         <div className="h-[100vh] flex flex-col">

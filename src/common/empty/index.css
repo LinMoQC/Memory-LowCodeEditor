@@ -1,0 +1,19 @@
+.ant-empty {
+    position: relative;
+    width: max-content;
+    height: max-content;
+}
+
+.ant-empty .ant-empty-description{
+    position: absolute;
+    bottom: 0 !important;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+}
+
+.ant-empty .ant-empty-image {
+    width: max-content;
+    height: max-content;
+    margin-left: 0;
+}
