@@ -12,7 +12,7 @@ interface SelectedMaskProps {
 
 const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
     const { containerClassName, portalWrapperClassName, componentId } = props
-    const { curComponentId, components, deleteComponent, setCurComponentId} = useComponentsStore();
+    const { curComponentId, components, deleteComponent, setCurComponentId } = useComponentsStore();
 
     const [position, setPosition] = useState({
         top: 0,
@@ -26,7 +26,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
     useEffect(() => {
         setTimeout(() => {
             updatePosition();
-        },200)
+        }, 200)
     }, [componentId, components])
 
     // ResizeObserver监听页面尺寸变化
@@ -49,6 +49,22 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
             resizeObserver.disconnect();
         };
     }, []);
+
+    // // 监听滚动事件
+    // useEffect(() => {
+    //     const container = document.getElementById('edit-area');
+    //     if (!container) return;
+
+    //     const handleScroll = () => {
+    //         updatePosition();
+    //     };
+
+    //     container.addEventListener('scroll', handleScroll);
+
+    //     return () => {
+    //         container.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, []);
 
     function updatePosition() {
         if (!componentId) {

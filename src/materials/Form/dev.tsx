@@ -1,24 +1,25 @@
-import { Form as AntdForm, Input } from 'antd';
+import { Form as AntdForm } from 'antd';
 import { useDrag } from 'react-dnd';
 import { useEffect, useMemo, useRef } from 'react';
 import React from 'react';
 import { CommonComponentProps } from '../../pages/editor/interface';
 import { useMaterailDrop } from '../../pages/editor/hooks/useMaterialDrop';
+import FormItem from '../FormItem/dev';
 
-interface FormProps extends CommonComponentProps{
+interface FormProps extends CommonComponentProps {
     onFinish: (values: any) => void
 }
 
-const Form:React.FC<FormProps> = (props) => {
+const Form: React.FC<FormProps> = (props) => {
     const {
-        id, 
-        name, 
-        children, 
+        id,
+        name,
+        children,
         onFinish
     } = props
 
     const [form] = AntdForm.useForm();
-    const {canDrop, drop } = useMaterailDrop(['FormItem'], id);
+    const { canDrop, drop } = useMaterailDrop(['FormItem'], id);
 
     const divRef = useRef<HTMLDivElement>(null);
 
@@ -46,7 +47,7 @@ const Form:React.FC<FormProps> = (props) => {
             }
         });
     }, [children]);
-    
+
     return <div
         className={`
             w-[100%] min-h-[100px] rounded-[4px]
@@ -59,15 +60,17 @@ const Form:React.FC<FormProps> = (props) => {
             <span className='font-light text-sm'>表单</span>
         </div>
         <div className='w-[100%] p-4'>
-        <AntdForm labelCol={{ span: 2 }} wrapperCol={{ span: 22 }} form={form} onFinish={(values) =>{
-            onFinish && onFinish(values)
-        }}>
-            {formItems.map((item: any) => {
-                return <AntdForm.Item key={item.name} data-component-id={item.id} name={item.name} label={item.label} >
-                    <Input style={{pointerEvents: 'none'}}/>
-                </AntdForm.Item>
-            })}
-        </AntdForm>
+            <AntdForm labelCol={{ span: 2 }} wrapperCol={{ span: 22 }} form={form} onFinish={(values) => {
+                onFinish && onFinish(values)
+            }}>
+                {formItems.map((item: any) => {
+                    return <FormItem 
+                        label={item.label} 
+                        key={item.name}
+                        id={item.id}
+                        name={item.name} />
+                })}
+            </AntdForm>
         </div>
     </div>
 }

@@ -2,7 +2,14 @@ import { Button as AntdButton } from "antd";
 import { useDrag } from "react-dnd";
 import { CommonComponentProps } from "../../pages/editor/interface";
 
-const Button = ({ id,type, text,styles }: CommonComponentProps) => {
+type ButtonSize = 'small' | 'middle' | 'large'
+
+interface ButtonProps extends CommonComponentProps {
+    danger: boolean, 
+    size: ButtonSize, 
+}
+
+const Button = ({ id,type, text,styles,danger,size }: ButtonProps) => {
     const [_, drag] = useDrag({
         type: 'Button',
         item: {
@@ -13,7 +20,7 @@ const Button = ({ id,type, text,styles }: CommonComponentProps) => {
     });
     
     return (
-        <AntdButton ref={drag} data-component-id={id} type={type} style={styles}>{text}</AntdButton>
+        <AntdButton ref={drag} data-component-id={id} type={type} style={styles} danger={danger} size={size}>{text}</AntdButton>
     )
 }
 

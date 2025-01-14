@@ -11,7 +11,7 @@ export const FlexItemConfig: ComponentConfig = {
         {
             name: 'flexRatio',
             label: "弹性比例",
-            type: 'input'
+            type: 'slider'
         }
     ],  // 设置器，如果有需要的设置器可以添加
     desc: "弹性容器项",  // 组件的描述，可以根据具体情况进行修改

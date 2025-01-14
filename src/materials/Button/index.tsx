@@ -6,7 +6,9 @@ export const ButtonConfig: ComponentConfig = {
     name: 'Button',
     defaultProps: {
         type: 'primary',
-        text: '按钮'
+        text: '按钮',
+        danger: false, 
+        size: 'middle', 
     },
     setter: [
         {
@@ -16,6 +18,24 @@ export const ButtonConfig: ComponentConfig = {
             options: [
                 { label: '主按钮', value: 'primary' },
                 { label: '次按钮', value: 'default' },
+                { label: '虚线按钮', value: 'dashed' },
+                { label: '文本按钮', value: 'text' },
+                { label: '链接按钮', value: 'link' },
+            ]
+        },
+        {
+            name: 'danger',
+            label: '危险按钮',
+            type: 'switch', 
+        },
+        {
+            name: 'size',
+            label: '按钮大小',
+            type: 'select',
+            options: [
+                { label: '大', value: 'large' },
+                { label: '中', value: 'middle' },
+                { label: '小', value: 'small' },
             ]
         },
         {

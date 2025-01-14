@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import { Component, useComponentsStore } from "../stores/componentes";
 import { useComponentConfigStore } from "../stores/component-config";
-import { message } from "antd";
+import { Empty, message } from "antd";
 import { ActionType } from "./ActionModal";
+import empty from '../../../assets/empty.jpg'
 
 const Preview: React.FC = () => {
     const { components } = useComponentsStore()
@@ -77,10 +78,22 @@ const Preview: React.FC = () => {
         })
     }
 
+    const isEmpty = useMemo(() => {
+        return components[0].children && components[0].children?.length > 0
+    },[components])
+
     return (
         <div className="bg-[#f7f7f9] w-[100%] h-[100%] p-5">
-            <div className="bg-white shadow-lg min-h-[100%] rounded-md">
-            {renderComponents(components)}
+            <div className="bg-white shadow-lg min-h-[100%] rounded-md" style={{position: 'relative'}}>
+            {isEmpty ? renderComponents(components) : <Empty 
+                image={<img
+                    src={empty}
+                    alt="Custom Empty"
+                    style={{ width: 400, height: 400 }}
+                />}
+                description={''}
+                className="absolute top-[30%] left-[48%] -translate-x-1/2 -translate-y-1/2"
+            />}
             </div>
         </div>
     )

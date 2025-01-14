@@ -1,4 +1,4 @@
-import { Form, Input, Select } from "antd";
+import { Form, Input, Select, Slider, Switch } from "antd";
 import React, { useEffect } from "react";
 import { ComponentSetter, useComponentsStore } from "../stores/componentes";
 import { ComponentConfig, useComponentConfigStore } from "../stores/component-config";
@@ -22,6 +22,10 @@ const ComponentAttr: React.FC = () => {
             return <Select options={options} />
         } else if (type === 'input') {
             return <Input />
+        } else if (type === 'slider') {
+            return <Slider min={0} max={10}/>
+        } else if (type === 'switch'){
+            return <Switch />
         }
     }
 

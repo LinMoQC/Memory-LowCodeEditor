@@ -69,7 +69,7 @@ const EditArea:React.FC = () => {
 
     return (
         <div 
-        className="h-[100%] edit-area" 
+        className="h-[100%] edit-area overflow-y-auto" 
         id="edit-area"
         onMouseOver={handleMouseOver} 
         onMouseLeave={() => setHoverComponentId(undefined)}
