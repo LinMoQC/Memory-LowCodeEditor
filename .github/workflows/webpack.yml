@@ -21,16 +21,15 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'  # 启用 npm 缓存
 
     - name: Install dependencies
-      run: npm install  # 使用 npm 安装依赖
+      run: npm install
 
     - name: Build with Vite
-      run: npm run build  # 使用 npm 构建
+      run: npm run build
 
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的 token
-        publish_dir: ./dist  # 部署的目录
+        name: build-output
+        path: ./dist 
