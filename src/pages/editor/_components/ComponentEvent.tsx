@@ -5,6 +5,7 @@ import type { ComponentEvent } from "../stores/component-config";
 import { Button, Collapse, CollapseProps, Empty, message } from "antd";
 import { ActionModal, ActionType } from "./ActionModal";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import EmptyStatus from "../../../common/empty";
 
 const ComponentEvent: React.FC = () => {
     const { curComponent, updateComponent, components } = useComponentsStore();
@@ -150,7 +151,7 @@ const ComponentEvent: React.FC = () => {
 
     return <div className='px-[10px]'>
         {!componentConfig[curComponent.name].events?.length ? <div>
-            <Empty description={<span>该组件没有事件～</span>}/>
+            <EmptyStatus description='该组件没有事件~' width={200} height={200} className="ml-8"/>
         </div> : <Fragment>
             <Collapse className='mb-[10px]' items={items} defaultActiveKey={componentConfig[curComponent.name].events?.map(item => item.name)} />
             <ActionModal visible={actionModalOpen} handleOk={handleModalOk} handleCancel={() => {

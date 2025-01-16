@@ -52,7 +52,9 @@ const ContainerItem = () => {
             `min-h-[200px] p-[20px] relative flex items-center justify-center flex-1
             border-dashed bg-[rgba(10,19,37,.05)]`
         }>
-            内容区域
+            <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-[#b8babf]">
+                    内容区域
+                </div>
         </div>
     )
 }

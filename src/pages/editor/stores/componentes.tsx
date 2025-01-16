@@ -129,7 +129,6 @@ export function getComponentById(
     components: Component[]
 ): Component | null {
     if (!id) return null;
-    console.log(components)
 
     for (const component of components) {
         if (component.id === id) {

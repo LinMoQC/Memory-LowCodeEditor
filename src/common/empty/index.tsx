@@ -1,5 +1,6 @@
 import { Empty } from 'antd'
 import './index.css'
+import { Fragment } from 'react/jsx-runtime'
 
 interface EmptyStatusProps {
     width: number
@@ -10,15 +11,17 @@ interface EmptyStatusProps {
 
 const EmptyStatus: React.FC<EmptyStatusProps> = (props) => {
     const {width,height,description,className} = props
-    return <Empty
+    return <div className='memoryEmpty'>   
+        <Empty
         image={<img
-            src='/empty.jpg'
+            src='/empty.png'
             alt="No Data"
             style={{ width: width, height: height }}
         />}
         description={description}
         className={className}
     />
+    </div>
 }
 
 export default EmptyStatus

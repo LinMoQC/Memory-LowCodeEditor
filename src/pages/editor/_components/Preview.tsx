@@ -29,14 +29,48 @@ const Preview: React.FC = () => {
                                 message.error(action.config.text);
                             }
                         } else if (action.type === 'customJS') {
-                            const func = new Function('context', 'args', action.code);
-                            func({
-                                name: component.name,
-                                props: component.props,
-                                showMessage(content: string) {
-                                    message.success(content)
-                                }
-                            }, args);
+                            const createSandbox = (actionCode: string) => {
+                                // 创建一个受限的上下文
+                                const context: Record<string, any> = {
+                                    name: component.name,
+                                    props: component.props,
+                                    showMessage(content: string) {
+                                        message.success(content);
+                                    }
+                                };
+                            
+                                // 使用 Proxy 限制上下文的访问
+                                const proxy = new Proxy(context, {
+                                    set(target, prop, value) {
+                                        if (prop in target) {
+                                            if (typeof prop === 'string') {
+                                                target[prop] = value;
+                                            } else {
+                                                throw new Error(`Cannot set property ${String(prop)}`);
+                                            }
+                                        } else {
+                                            throw new Error(`Cannot set property ${String(prop)}`);
+                                        }
+                                        return true;
+                                    },
+                                    get(target, prop) {
+                                        if (prop in target) {
+                                            if (typeof prop === 'string') {
+                                                return target[prop];
+                                            } else {
+                                                throw new Error(`Property ${String(prop)} is not accessible`);
+                                            }
+                                        } else {
+                                            throw new Error(`Property ${String(prop)} is not accessible`);
+                                        }
+                                    }
+                                });
+                            
+                                // 执行用户代码
+                                const func = new Function('context', 'args', actionCode);
+                                return func(proxy, args);
+                            }
+                            createSandbox(action.code);
                         } else if (action.type === 'componentMethod') {
                             const component = componentRefs.current[action.config.componentId];
 
