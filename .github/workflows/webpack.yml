@@ -33,3 +33,9 @@ jobs:
       with:
         name: build-output
         path: ./dist 
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的 token
+        publish_dir: ./dist  # 部署的目录
