@@ -26,7 +26,8 @@ const nodeTypes = {
 }
 
 
-const Flow: React.FC<FlowProps> = (props) => {
+const Flow: React.FC<FlowProps> = () => {
+    // @ts-ignore
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 

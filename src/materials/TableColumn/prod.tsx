@@ -19,7 +19,9 @@ const TableColumn: React.FC<TableColumnProps> = (props) => {
         children,
     } = props
 
+    // @ts-ignore
     const [data, setData] = useState<Array<Record<string, any>>>(TestData);
+    // @ts-ignore
     const [loading, setLoading] = useState(false);
 
     const columns = useMemo(() => {
