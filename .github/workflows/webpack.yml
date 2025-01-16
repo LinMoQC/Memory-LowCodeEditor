@@ -21,19 +21,13 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'  # 启用 pnpm 缓存
-
-    - name: Install pnpm
-      run: npm install -g pnpm
-
-    - name: Verify pnpm installation
-      run: pnpm --version  # 验证 pnpm 是否正确安装
+        cache: 'npm'  # 启用 npm 缓存
 
     - name: Install dependencies
-      run: pnpm install  # 使用 pnpm 安装依赖
+      run: npm install  # 使用 npm 安装依赖
 
     - name: Build with Vite
-      run: pnpm run build  # 使用 pnpm 构建
+      run: npm run build  # 使用 npm 构建
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
