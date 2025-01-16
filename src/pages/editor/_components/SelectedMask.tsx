@@ -81,7 +81,7 @@ const SelectedMask: React.FC<SelectedMaskProps> = (props) => {
         const { top: containerTop, left: containerLeft } = container.getBoundingClientRect();
 
         let labelTop = top - containerTop + container.scrollTop;
-        let labelLeft = left - containerLeft + width;
+        const labelLeft = left - containerLeft + width;
 
         if (labelTop <= 0) {
             labelTop += 20;

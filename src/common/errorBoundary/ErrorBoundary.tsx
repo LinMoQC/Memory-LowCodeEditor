@@ -1,5 +1,4 @@
 import React, { Component, ReactNode } from "react";
-import errorGirl from '../../assets/error.png'
 
 interface ErrorBoundaryProps {
     children: ReactNode;

@@ -16,10 +16,7 @@ interface TableColumnProps extends CommonComponentProps {
 const TableColumn: React.FC<TableColumnProps> = (props) => {
 
     const {
-        id,
-        name,
         children,
-        styles
     } = props
 
     const [data, setData] = useState<Array<Record<string, any>>>(TestData);

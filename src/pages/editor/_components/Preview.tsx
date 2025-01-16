@@ -29,6 +29,7 @@ const Preview: React.FC = () => {
                                 message.error(action.config.text);
                             }
                         } else if (action.type === 'customJS') {
+                            // 沙箱📦
                             const createSandbox = (actionCode: string) => {
                                 // 创建一个受限的上下文
                                 const context: Record<string, any> = {

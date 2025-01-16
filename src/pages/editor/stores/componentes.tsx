@@ -32,7 +32,7 @@ interface Action {
     deleteComponent: (componentId: string) => void;
     updateComponent: (componentId: string, props: any) => void;
     setCurComponentId: (componentId: string) => void;
-    updateComponentStyles: (componentId: string, styles: CSSProperties, replace?: Boolean) => void
+    updateComponentStyles: (componentId: string, styles: CSSProperties, replace?: boolean) => void
     setMode: (mode: State['mode']) => void;
 }
 

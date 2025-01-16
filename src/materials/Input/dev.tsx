@@ -5,7 +5,7 @@ interface InputProps extends CommonComponentProps {
     
 }
 
-const Input: React.FC<InputProps> = (props) => {
+const Input: React.FC<InputProps> = () => {
     return (
         <div>
             Input

@@ -1,14 +1,13 @@
 {
   "name": "memoryflow",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "build:materials": "rollup -c rollup.config.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
@@ -19,7 +18,7 @@
     "antd": "^5.23.0",
     "dayjs": "^1.11.13",
     "lodash-es": "^4.17.21",
-    "memory-library": "^1.2.0",
+    "memory-library": "^1.2.8",
     "monaco-editor": "^0.52.2",
     "react": "^18.3.1",
     "react-dnd": "^16.0.1",

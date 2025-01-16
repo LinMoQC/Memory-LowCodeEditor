@@ -1,4 +1,4 @@
-import React, { useImperativeHandle, useState, forwardRef } from "react";
+import { useImperativeHandle, useState, forwardRef } from "react";
 import { Modal as AntdModal } from 'antd';
 import { CommonComponentProps } from "../../pages/editor/interface";
 

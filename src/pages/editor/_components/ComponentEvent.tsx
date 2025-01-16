@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { getComponentById, useComponentsStore } from "../stores/componentes";
 import { useComponentConfigStore } from "../stores/component-config";
 import type { ComponentEvent } from "../stores/component-config";
-import { Button, Collapse, CollapseProps, Empty, message } from "antd";
+import { Button, Collapse, CollapseProps, message } from "antd";
 import { ActionModal, ActionType } from "./ActionModal";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import EmptyStatus from "../../../common/empty";

@@ -3,7 +3,7 @@ import { CommonComponentProps } from '../../pages/editor/interface';
 
 const Button = ({ id, type, text, styles,...props }: CommonComponentProps) => {
     return (
-        <AntdButton type={type} style={styles} {...props}>{text}</AntdButton>
+        <AntdButton type={type} id='id' style={styles} {...props}>{text}</AntdButton>
     )
 }
 

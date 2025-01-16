@@ -6,7 +6,7 @@ interface FlexContainerProps extends CommonComponentProps {
 }
 
 const FlexContainer: React.FC<FlexContainerProps> = (props) => {
-    const {id, name, children, styles} = props
+    const { children, styles} = props
 
     return (
         <div

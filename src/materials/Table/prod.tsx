@@ -10,7 +10,6 @@ interface TableProps extends CommonComponentProps {
 const Table:React.FC<TableProps> = (props) => {
     const {
         id, 
-        name, 
         children, 
         styles
     } = props

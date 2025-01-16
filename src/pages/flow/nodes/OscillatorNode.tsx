@@ -8,7 +8,7 @@ export interface OscillatorNodeProps {
     }
 }
 
-export function OscillatorNode({ id, data }: OscillatorNodeProps) {
+export function OscillatorNode({ data }: OscillatorNodeProps) {
     return (
         <div className={'bg-white shadow-xl'}>
             <p className={'rounded-t-md p-[8px] bg-pink-500 text-white'}>振荡器节点</p>

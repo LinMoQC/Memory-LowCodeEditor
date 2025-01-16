@@ -5,7 +5,7 @@ interface TableColumnProps extends CommonComponentProps {
 
 }
 
-const TableColumn: React.FC<TableColumnProps> = (props) => {
+const TableColumn: React.FC<TableColumnProps> = () => {
     return (
         <div>
 

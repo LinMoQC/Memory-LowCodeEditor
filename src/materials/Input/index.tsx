@@ -1,5 +1,3 @@
-import InputDev from './dev'
-import InputProd from './prod'
 import { ComponentConfig } from "../../pages/editor/stores/component-config";
 
 export const InputConfig: ComponentConfig = {

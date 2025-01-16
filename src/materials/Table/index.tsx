@@ -1,6 +1,5 @@
 import { ComponentConfig } from "../../pages/editor/stores/component-config";
 import TableDev from "./dev";
-import TableProd from "./prod";
 
 export const TableConfig: ComponentConfig = {
     name: 'Table',

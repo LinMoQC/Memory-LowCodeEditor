@@ -1,6 +1,5 @@
 import { Empty } from 'antd'
 import './index.css'
-import { Fragment } from 'react/jsx-runtime'
 
 interface EmptyStatusProps {
     width: number

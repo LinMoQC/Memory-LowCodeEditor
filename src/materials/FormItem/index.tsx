@@ -1,5 +1,4 @@
 import { MaterialType } from "../../pages/editor/stores/component-config";
-import FormItemDev from "./dev";
 import FormItemProd from "./prod";
 
 export const FormItemConfig = {

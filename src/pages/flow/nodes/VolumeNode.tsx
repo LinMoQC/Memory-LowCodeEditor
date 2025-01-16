@@ -7,7 +7,7 @@ export interface VolumeNodeProps {
     }
 }
 
-export function VolumeNode({ id, data }: VolumeNodeProps) {
+export function VolumeNode({ data }: VolumeNodeProps) {
     return (
         <div className={'rounded-md bg-white shadow-xl'}>
             <Handle type="target" position={Position.Top} />
