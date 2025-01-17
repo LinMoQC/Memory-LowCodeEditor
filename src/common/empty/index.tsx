@@ -13,7 +13,7 @@ const EmptyStatus: React.FC<EmptyStatusProps> = (props) => {
     return <div className='memoryEmpty'>   
         <Empty
         image={<img
-            src='/empty.png'
+            src='./empty.png'
             alt="No Data"
             style={{ width: width, height: height }}
         />}

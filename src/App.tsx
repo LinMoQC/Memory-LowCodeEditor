@@ -1,7 +1,7 @@
 import { DndProvider } from "react-dnd";
 import Editor from "./pages/editor";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Flow from "./pages/flow";
 import ErrorBoundary from "./common/errorBoundary/ErrorBoundary";
 import Test from "./pages/test";
