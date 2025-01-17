@@ -4,7 +4,11 @@
 > Memory Flow 是一个基于React + Typescript + Zustand 的低代码编辑器，用于减少重复造轮子（Maybe），目前正在开发中～
 
 ## 📚 预览
-![预览](./src/assets/pre.gif)
+
+<div style="text-align: center;">
+  <img src="./src/assets/pre.gif" alt="预览"/>
+</div>
+
 
 ## ✨ 使用文档
 ``` javascript
