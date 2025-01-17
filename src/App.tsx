@@ -24,7 +24,7 @@ function App() {
 
           <Route path="/flow" element={<Flow />} />
           <Route path="/test" element={<Test />} />
-          <Route path="*" element={<NotFound />} /> {/* 捕捉所有未匹配的路由 */}
+          <Route path="*" element={<NotFound />} /> 
         </Routes>
       </Router>
     </ErrorBoundary>
