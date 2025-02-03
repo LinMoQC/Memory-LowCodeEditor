@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Button, Collapse, CollapseProps } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
-import { ActionModal, ActionType } from "../ActionModal";
+import ActionModal, { ActionType } from "../ActionModal";
 import type {LowCodeComponentEvent} from "../../types/LowCodeCofigType.ts";
 import {useLowCodeStore} from "../../hooks/useLowCode.ts";
 import {useLowCodeConfigStore} from "../../hooks/useLowCodeConfig.ts";

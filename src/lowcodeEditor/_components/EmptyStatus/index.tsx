@@ -1,5 +1,6 @@
 import { Empty } from 'antd'
 import './index.css'
+import React from 'react'
 
 interface EmptyStatusProps {
     width: number

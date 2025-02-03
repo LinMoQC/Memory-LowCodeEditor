@@ -1,4 +1,4 @@
-import path from 'path'
+import replace from '@rollup/plugin-replace';
 import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
@@ -10,24 +10,25 @@ export default {
     input: 'src/lowcodeEditor/index.ts',
     output: [
         {
-            file: 'dist/index.esm.js',
+            file: 'dist/index.js',
             format: 'esm',
             sourcemap: true,
             exports: 'named'
         },
-        {
-            file: 'dist/index.cjs.js',
-            format: 'cjs',
-            sourcemap: true,
-            exports: 'named'
-        }
     ],
     plugins: [
+        replace({
+            'use client': '',
+            delimiters: ['', ''],
+            preventAssignment: true
+        }),
         postcss({
             modules: true,
             extract: true,
             minimize: true,
-            sourceMap: true
+            config: {
+                path: "./postcss.config.js",
+            },
         }),
         resolve({
             extensions: ['.ts', '.tsx', '.js', '.jsx']
@@ -63,8 +64,15 @@ export default {
         'react-dom',
         'react/jsx-runtime',
         'antd',
+        '@ant-design/icons',
         'dayjs',
         'react-dnd',
-        'react-dnd-html5-backend'
-    ]
+        'react-dnd-html5-backend',
+        '@cusmoedge/lowcode-materials',
+        '@cusmoedge/lowcode-editor',
+        'monaco-editor',
+        'zustand',
+        'lodash-es',
+    ],
+    context: "window",  // 添加这一行
 }

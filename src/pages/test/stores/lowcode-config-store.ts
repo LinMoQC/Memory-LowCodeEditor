@@ -1,6 +1,6 @@
 import {create} from "zustand/index";
 import {LowCodeConfigAction, LowCodeConfigState} from "../../../lowcodeEditor/types/LowCodeCofigType.ts";
-import {MaterialConfigs} from "memory-materials";
+import {MaterialConfigs} from "@cusmoedge/lowcode-materials";
 
 export const useLowCodeConfigStore = create<LowCodeConfigState & LowCodeConfigAction>((set) => ({
     componentConfig: MaterialConfigs,

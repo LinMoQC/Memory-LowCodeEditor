@@ -4,7 +4,7 @@ import SelectedMask from "./SelectedMask";
 import {useLowCodeStore} from "../../hooks/useLowCode.ts";
 import {useLowCodeConfigStore} from "../../hooks/useLowCodeConfig.ts";
 import {LowCodeComponent} from "../../types/LowCodeType.ts";
-import {MaterialDropProvider} from "memory-materials";
+import {MaterialDropProvider} from "@cusmoedge/lowcode-materials";
 
 const EditArea:React.FC = () => {
     const {components,curComponentId,setCurComponentId,addComponent, deleteComponent, getComponentById,} = useLowCodeStore();

@@ -1,5 +1,6 @@
 import LowCodeEditor from './_components/index.tsx'
 import type LowCodeEditorProps from './_components/index.tsx'
+import './index.css'
 
 export { LowCodeEditor, LowCodeEditorProps }
 

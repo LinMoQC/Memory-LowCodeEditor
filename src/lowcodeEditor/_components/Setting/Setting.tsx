@@ -5,6 +5,7 @@ import ComponentStyle from "./ComponentStyle";
 import ComponentEvent from "./ComponentEvent";
 import EmptyStatus from "../EmptyStatus";
 import {useLowCodeStore} from "../../hooks/useLowCode.ts";
+import React from "react";
 
 const Setting: React.FC = () => {
     const { curComponent } = useLowCodeStore();

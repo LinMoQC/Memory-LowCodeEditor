@@ -2,8 +2,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "Node",
-    "jsx": "react",
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
     "declaration": true,                // 启用类型声明生成
     "declarationDir": "./dist",         // 类型声明文件输出到 dist 目录
     "esModuleInterop": true,
@@ -11,8 +11,11 @@
     "strict": true,
     "allowImportingTsExtensions": true,
     "emitDeclarationOnly": true,
+    "paths": {
+      "@cusmoedge/lowcode-materials": ["./node_modules/@cusmoedge/lowcode-materials/dist/esm/index.d.ts"]
+    }
   },
   "include": [
-    "src/**/*"
+    "src/lowcodeEditor/*"
   ]
 }

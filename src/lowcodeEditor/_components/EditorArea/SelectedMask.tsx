@@ -1,5 +1,3 @@
-'use client'
-
 import React, { Fragment, useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { Dropdown, Popconfirm, Space } from "antd";

@@ -4,6 +4,7 @@ import { GoToLink, GoToLinkConfig } from "../actions/GoToLink"
 import { ShowMessage, ShowMessageConfig } from "../actions/ShowMessage"
 import { CustomJS, CustomJSConfig } from "../actions/CustomJS"
 import { ComponentMethod, ComponentMethodConfig } from "../actions/ComponentMethod"
+import React from "react"
 
 export interface ActionModalProps {
     visible: boolean
