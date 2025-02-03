@@ -6,8 +6,8 @@ export default defineConfig({
   // 设置项目的基础路径
   base: './',
   build: {
-    outDir: 'dist', 
-    assetsDir: 'assets', 
+    outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
       output: {
         assetFileNames: 'assets/[name]-[hash][extname]',
