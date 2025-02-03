@@ -1,7 +1,7 @@
-# Memory Flow
+# Memory LowCodeEditor
 
 ## 🌟 介绍
-> Memory Flow 是一个基于React + Typescript + Zustand 的低代码编辑器，用于减少重复造轮子（Maybe），目前正在开发中～
+> Memory LowCodeEditor 是一个基于React + Typescript + Zustand 的低代码编辑器，用于减少重复造轮子（Maybe），目前正在开发中～（目前正在抽离成为独立编辑器）
 
 ## 📚 预览
 
