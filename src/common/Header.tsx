@@ -11,7 +11,7 @@ const Header: React.FC = () => {
             <div className='h-[100%] flex justify-between items-center px-[20px]'>
                 <h2 className='text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 
                     tracking-wider leading-tight italic'>
-                    Memory Flow
+                    Memory LowCode Editor
                 </h2>
                 <Space>
                     {mode === 'edit' && (
