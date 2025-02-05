@@ -1,16 +1,20 @@
 {
   "name": "@cusmoedge/lowcode-editor",
   "private": false,
-  "version": "1.0.6",
+  "version": "1.1.3",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "./dist/index.d.ts",
+  "style": "dist/index.css",
   "description": "Memory LowCodeEditor",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.js",
-    "require": "./dist/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./index.css": "./dist/index.css"
   },
   "author": "LinMoQC",
   "files": [
@@ -23,11 +27,11 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:memory": "rollup -c"
+    "build:memory": "node scripts/build.js"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
-    "@cusmoedge/lowcode-editor": "^1.0.6",
+    "@cusmoedge/lowcode-editor": "^1.1.2",
     "@cusmoedge/lowcode-materials": "^1.1.3",
     "@monaco-editor/react": "^4.6.0",
     "allotment": "^1.20.2",
@@ -59,9 +63,11 @@
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "chalk": "^5.4.1",
     "eslint": "^9.17.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
+    "figlet": "^1.8.0",
     "globals": "^15.14.0",
     "postcss": "^8.4.49",
     "rollup": "^4.34.1",

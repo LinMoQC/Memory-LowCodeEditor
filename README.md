@@ -1,7 +1,7 @@
-# Memory Flow
+# Memory LowCode-Editor
 
 ## 🌟 介绍
-> Memory Flow 是一个基于React + Typescript + Zustand 的低代码编辑器，用于减少重复造轮子（Maybe），目前正在开发中～
+> Memory LowCode-Editor 是一个基于React + Typescript + Zustand 的低代码编辑器，用于减少重复造轮子（Maybe），目前正在开发中～
 
 ## 📚 预览
 
@@ -11,61 +11,108 @@
 
 
 ## ✨ 使用文档
+
+### 安装依赖
 ``` javascript
-npm install
-npm run dev
+npm i @cusmoedge/lowcode-editor
+npm i @cusmoedge/lowcode-materials // 物料库
 ```
 
-## 🚀 开发文档
-
-### 安装 Memory CLI
-``` javascript
-npm install linmo-cli -g
-```
-
-### 生成物料模版
-``` javascript
-memory create [materialName]
-```
-
-### 物料类别
-``` javascript
-// 物料类型
-type MaterialType = 'unit' | 'area' | 'special'
-
-// unit ---- 单元级物料，如Button,Input
-// area ---- 区域级物料，如Page,Container
-// special ---- 特殊物料，如FormItem只能投放在Form内
-```
-
-### 物料配置
+### 编写全局Store
 ``` typescript
-// 物料会生成dev和prod，用于编辑状态和预览状态
-ComponentConfig = {
-    name: "test",  // 组件名称
-    defaultProps: {},  // 默认属性，可以根据需求进行配置
-    setter: [],  // 设置器，如果有需要的设置器可以添加
-    desc: "test 组件描述",  // 组件的描述，可以根据具体情况进行修改
-    stylesSetter: [],  // 样式设置器，可以根据需求进行添加
-    dev: {},  // 编辑环境配置，可以根据需要添加
-    prod: {},  // 预览环境配置，可以根据需要添加
-    events: [],  // 事件，可以添加具体的事件对象
-    methods: []  // 方法，可以添加具体的组件方法
+// 目前只适配Zustand
+
+// lowcode-store.ts
+const creator: StateCreator<LowCodeState & LowCodeAction> = (set, get) => {
+    return {
+        components: [], // 存储所有组件
+        curComponent: null, // 当前选中的组件
+        curComponentId: null, // 当前选中组件的 ID
+        mode: 'edit', // 编辑器模式
+
+        // 设置编辑模式
+        setMode: (mode) => set({ mode }),
+
+        // 设置当前选中的组件 ID
+        setCurComponentId: (componentId) => { /* 实现逻辑 */ },
+
+        // 添加新组件
+        addComponent: (component, parentId) => { /* 实现逻辑 */ },
+
+        // 删除组件
+        deleteComponent: (componentId) => { /* 实现逻辑 */ },
+
+        // 更新组件属性
+        updateComponent: (componentId, props) => { /* 实现逻辑 */ },
+
+        // 更新组件样式（支持部分或完全替换）
+        updateComponentStyles: (componentId, styles, replace) => { /* 实现逻辑 */ },
+
+        // 根据 ID 查找组件
+        getComponentById: (id, components) => { /* 实现逻辑 */ },
+    };
+};
+
+export const useLowCodeStore = create<LowCodeState & LowCodeAction>()(creator);
+
+// lowcode-config-store.ts
+export const useLowCodeConfigStore = create<LowCodeConfigState & LowCodeConfigAction>((set) => ({
+    componentConfig: MaterialConfigs, // 默认物料库，可根据文档自定义
+    registerComponent: (name, componentConfig) => set((state) => {
+        return {
+            ...state,
+            componentConfig: {
+                ...state.componentConfig,
+                [name]: componentConfig
+            }
+        }
+    })
+}));
+```
+
+### 🚀 注入全局Store
+``` typescript
+import {LowCodeStoreProvider} from "@cusmoedge/lowcode-editor";
+import {LowCodeConfigStoreProvider} from "@cusmoedge/lowcode-editor";
+import {useLowCodeStore} from "./stores/lowcode-store.ts";
+import {useLowCodeConfigStore} from "./stores/lowcode-config-store.ts";
+import '@cusmoedge/lowcode-editor/index.css' // 引入样式
+import LowCodeEditor from '@cusmoedge/lowcode-editor'
+
+export default function Test() {
+    return (
+        <div className='h-[100vh] w-full p-5'>
+            <LowCodeStoreProvider store={useLowCodeStore}>
+                <LowCodeConfigStoreProvider store={useLowCodeConfigStore}>
+                    <LowCodeEditor />
+                </LowCodeConfigStoreProvider>
+            </LowCodeStoreProvider>
+        </div>
+    )
 }
 ```
 
-### 注册物料
-```typescript
-// editor/stores/component-config
-componentConfig: {
-        Container: ContainerConfig,
-        Button: ButtonConfig,
-        Page: PageConfig,
-        Modal: ModalConfig,
-        Table: TableConfig,
-        TableColumn: TableColumnConfig,
-        Form: FormConfig,
-        FormItem: FormItemConfig,
-        new: newConfig
-    }
-```
+# 🎯 特点  
+
+## ⚡️ 高扩展性  
+- 采用 **Zustand** 注入全局状态，支持灵活扩展和自定义。  
+- **支持物料注册**，开发者可以轻松扩展物料库，新增组件无需改动核心代码。   
+
+## 🎨 拖拽式低代码编辑  
+- 提供 **拖拽式 UI 组件布局**，降低开发成本，无需手写 JSX。  
+- 可视化搭建页面，支持 **实时预览**。  
+
+## 🔧 高度自定义  
+- 组件支持 **属性配置** 和 **事件绑定**，满足各种业务需求。  
+- 可扩展 **样式编辑器**，支持动态样式修改。  
+
+## 📦 完整的物料生态  
+- **内置基础物料库**，开箱即用（Button、Table、Form 等）。  
+- **支持自定义物料**，可根据业务需求灵活拓展。  
+
+## 🔗 易集成  
+- 提供 **简洁的 API**，方便接入其他 React 项目。  
+- **支持 TypeScript**，类型安全，增强开发体验。  
+
+
+

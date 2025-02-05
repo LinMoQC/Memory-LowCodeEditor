@@ -23,7 +23,6 @@ export default {
             preventAssignment: true
         }),
         postcss({
-            modules: true,
             extract: true,
             minimize: true,
             config: {
@@ -74,5 +73,5 @@ export default {
         'zustand',
         'lodash-es',
     ],
-    context: "window",  // 添加这一行
+    context: "window",  
 }
