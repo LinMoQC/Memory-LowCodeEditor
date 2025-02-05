@@ -49,10 +49,11 @@ const EditArea:React.FC = () => {
         return components.map((component: LowCodeComponent) => {
             const config = componentConfig?.[component.name];
 
-
             if(!config?.dev){
                 return null;
             }
+
+            console.log(config?.dev)
 
             return React.createElement(
                 config.dev,
