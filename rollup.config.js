@@ -1,8 +1,8 @@
 import replace from '@rollup/plugin-replace';
 import typescript from 'rollup-plugin-typescript2'
 import resolve from '@rollup/plugin-node-resolve'
-import commonjs from '@rollup/plugin-commonjs'
-import { terser } from 'rollup-plugin-terser'
+import commonjs from '@rollup/plugin-commonjs';
+import terser from '@rollup/plugin-terser';
 import babel from '@rollup/plugin-babel'
 import postcss from 'rollup-plugin-postcss'
 
@@ -49,7 +49,7 @@ export default {
                 '@babel/preset-typescript'
             ],
             plugins: [
-                '@babel/plugin-proposal-class-properties'
+                '@babel/plugin-transform-class-properties'
             ]
         }),
         terser({

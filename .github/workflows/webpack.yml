@@ -28,10 +28,10 @@ jobs:
           node-version: '20.x'  # 根据需要调整 Node.js 版本
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Build with Vite
-        run: npm run build
+        run: pnpm run build
 
       - name: List dist directory
         run: ls -la ./dist  # 列出构建输出目录的内容

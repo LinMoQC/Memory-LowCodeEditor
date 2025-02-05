@@ -1,9 +1,6 @@
-import {LowCodeStoreProvider} from "@cusmoedge/lowcode-editor";
-import {LowCodeConfigStoreProvider} from "@cusmoedge/lowcode-editor";
-import {useLowCodeStore} from "./stores/lowcode-store.ts";
-import {useLowCodeConfigStore} from "./stores/lowcode-config-store.ts";
-import '@cusmoedge/lowcode-editor/index.css'
-import LowCodeEditor from '@cusmoedge/lowcode-editor'
+import LowCodeEditor, { LowCodeConfigStoreProvider, LowCodeStoreProvider } from "../../lowcodeEditor";
+import { useLowCodeConfigStore } from "./stores/lowcode-config-store";
+import { useLowCodeStore } from "./stores/lowcode-store";
 
 export default function Test() {
     return (

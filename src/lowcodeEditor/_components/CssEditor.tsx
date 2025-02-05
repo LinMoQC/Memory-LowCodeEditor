@@ -15,7 +15,7 @@ interface Props {
     options?: editor.IStandaloneDiffEditorConstructionOptions
 }
 
-export default function (props: Props) {
+const CssEditor: React.FC<Props> = (props: Props) => {
     const { value, onChange, options } = props
 
     const handleEditorMount: OnMount = (editor, monaco) => {
@@ -46,10 +46,12 @@ export default function (props: Props) {
                         verticalScrollbarSize: 6,
                         horizontalScrollbarSize: 6,
                     },
-                    fixedOverflowWidgets: true, // 防止提示框溢出编辑器
+                    fixedOverflowWidgets: true,
                     ...options
                 }
             }
         />
     )
 }
+
+export default CssEditor
