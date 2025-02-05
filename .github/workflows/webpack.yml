@@ -26,10 +26,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          cache: 'pnpm'  # 缓存 pnpm 依赖，加速构建
+          cache: 'pnpm'  # 让 GitHub Actions 缓存 pnpm 依赖
 
       - name: Install pnpm
-        run: npm install -g pnpm  # 安装 pnpm
+        run: npm install -g pnpm
+
+      - name: Verify pnpm installation
+        run: pnpm --version  # 确保 pnpm 已正确安装
 
       - name: Install dependencies
         run: pnpm install
@@ -43,5 +46,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # `secrets.GITHUB_TOKEN` 默认可用
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
