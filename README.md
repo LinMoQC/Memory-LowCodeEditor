@@ -20,7 +20,7 @@ npm i @cusmoedge/lowcode-materials // 物料库
 
 ### 编写全局Store
 ``` typescript
-// 目前只适配Zustand
+// 目前只适配Zustand，可以复制src/pages/test/stores下的默认配置
 
 // lowcode-store.ts
 const creator: StateCreator<LowCodeState & LowCodeAction> = (set, get) => {
