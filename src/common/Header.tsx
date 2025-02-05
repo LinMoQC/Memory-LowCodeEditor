@@ -2,12 +2,12 @@ import React from "react";
 import { Button, Space } from "antd";
 import { FaRegEdit } from "react-icons/fa";
 import { VscOpenPreview } from "react-icons/vsc";
-import {useLowCodeStore} from "../hooks/useLowCode.ts";
+import { useLowCodeStore } from "../pages/test/stores/lowcode-store";
 
 const Header: React.FC = () => {
     const { mode, setMode, setCurComponentId } = useLowCodeStore();
     return (
-        <div className='w-[100%] h-[100%]'>
+        <div className='w-[100%] h-14 border-b-2'>
             <div className='h-[100%] flex justify-between items-center px-[20px]'>
                 <h2 className='text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500 
                     tracking-wider leading-tight italic'>
